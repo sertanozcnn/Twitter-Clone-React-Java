@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import React from 'react';
+import Sidebar from '../../components/Sidebar';
 
 
 const HomePage = () => {
@@ -12,6 +13,7 @@ const HomePage = () => {
             <div className='stick top-0'>
 
 
+              <Sidebar />
 
           
 
