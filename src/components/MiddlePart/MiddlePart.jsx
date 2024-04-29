@@ -5,9 +5,11 @@ import StoryCircle from './StoryCircle';
 import { IoImageOutline } from "react-icons/io5";
 import { IoVideocamOutline } from "react-icons/io5";
 import { PiArticle } from "react-icons/pi";
+import PostCard from '../Post/PostCard';
 
 
 const story = [11, 1, 1, 1, 1,1];
+const posts = [1,1,1,1,1];
 
 const MiddlePart = () => {
 
@@ -48,6 +50,7 @@ const MiddlePart = () => {
                 <IoImageOutline/>
               </IconButton>
               <span>Media</span>
+              
             </div>
 
              
@@ -70,8 +73,15 @@ const MiddlePart = () => {
 
 
         </Card>
+        <div className='mt-5 space-y-5'>
+          {posts.map((item)=> <PostCard/>)}
+         
+         
+        </div>
 
       </section>
+
+
 
 
 
