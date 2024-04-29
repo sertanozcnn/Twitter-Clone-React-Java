@@ -14,7 +14,7 @@ const HomePage = () => {
   const location = useLocation();
 
   return (
-    <div className='px-40'>
+    <div className='px-40 bg-purpleOn' >
       <Grid container spacing={0}>
         <Grid item xs={0} lg={3}>
           <div className='sticky top-0'>
