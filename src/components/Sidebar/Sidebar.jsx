@@ -40,6 +40,7 @@ const Sidebar = () => {
               <p className='opacity-70'>@sertanozcann</p>
             </div>
           </div>
+          
           <Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
@@ -60,7 +61,6 @@ const Sidebar = () => {
             }}
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
         </div>
