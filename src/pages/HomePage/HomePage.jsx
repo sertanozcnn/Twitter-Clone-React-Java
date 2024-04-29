@@ -3,12 +3,12 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import React from 'react';
-import Sidebar from '../../components/Sidebar';
 import MiddlePart from '../../components/MiddlePart/MiddlePart';
 import Reels from '../../components/Reels/Reels';
 import CreateReelsForm from '../../components/Reels/CreateReelsForm';
 import Profile from '../Profile/Profile';
 import HomeRight from '../../components/HomeRight/HomeRight';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 const HomePage = () => {
   const location = useLocation();
