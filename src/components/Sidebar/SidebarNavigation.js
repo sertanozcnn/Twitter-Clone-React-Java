@@ -16,6 +16,10 @@ export const navigationMenu = [
         title: "Home",
         icon: <BiHomeCircle  size={28} />,
         path: "/",
+      
+        
+        
+
     },
     {
         title: "Reels",
@@ -50,7 +54,7 @@ export const navigationMenu = [
     {
         title: "Profile",
         icon: <MdOutlineAccountCircle  size={28} />,
-        path: "/",
+        path: "/profile/1",
     },
 
 ]

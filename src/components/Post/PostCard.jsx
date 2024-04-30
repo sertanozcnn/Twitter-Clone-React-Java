@@ -12,7 +12,7 @@ import { IoBookmark } from "react-icons/io5";
 
 const PostCard = () => {
   return (
-    <Card className='mb-4' style={{ backgroundColor: "#211b44" }}>
+    <Card className='' style={{ backgroundColor: "#211b44" }}>
 
       <CardHeader
 

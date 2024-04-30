@@ -21,23 +21,25 @@ const HomePage = () => {
             <Sidebar />
           </div>
         </Grid>
-        <Grid lg={location.pathname === "/" ? 6: 9}  xs={12} item className='px-5 flex justify-center ' >
+        <Grid lg={location.pathname === "/" ? 6: 9}  item className='px-5 flex justify-center' >
           <Routes>
             <Route path="/" element={<MiddlePart />} />
             <Route path="/reels" element={<Reels />} />
             <Route path="/create-reels" element={<CreateReelsForm />} />
-            <Route path="/profile/:id" element={<Profile />} />
+            <Route  path="/profile/:id" element={<Profile />} />
           </Routes>
         </Grid>
 
-        <Grid item lg={3} className='relative justify-end'>
-          <div className='sticky top-5 w-full mx-2 '>
+    
+
+        {location.pathname==="/" && <Grid item lg={3} className='relative justify-end'>
+          <div className='sticky top-10 w-full mx-2 '>
 
           <HomeRight  />
 
           </div>
 
-        </Grid>
+        </Grid>}
 
       </Grid>
     </div>
