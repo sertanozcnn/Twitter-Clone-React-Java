@@ -1,0 +1,47 @@
+[33mcommit d8dd312e20d41d5154bf807be43fe11d11290912[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Mon Apr 29 00:56:04 2024 +0300
+
+    Profile Id Update
+
+[33mcommit 34e4ef0cbc8aeff54c8c1d56aec0ef90760c301f[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Mon Apr 29 00:42:57 2024 +0300
+
+    HomePage All Update - Add Components Page
+
+[33mcommit b06c448de3259902823ed37e320c621cd1485370[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Sun Apr 28 23:54:18 2024 +0300
+
+    Add useLocation
+
+[33mcommit 0e1fb0fa66d76d929e6db3d168227cb1401567e5[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Sun Apr 28 23:46:45 2024 +0300
+
+    Sidebar Homepage added
+
+[33mcommit 236d9a2a4d6b2630ceb441ba11874c7966702413[m[33m ([m[1;32mComponents[m[33m)[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Sun Apr 28 23:44:54 2024 +0300
+
+    Components Create
+
+[33mcommit 3431fab4bc26d4f86580a3219b53a8982ef67ec9[m[33m ([m[1;32mHome[m[33m)[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Sun Apr 28 23:42:17 2024 +0300
+
+    Home Page Create Update
+
+[33mcommit c472b0388c52aa1ea5ca43d82e2520f09d641559[m[33m ([m[1;33mtag: [m[1;33mV1[m[33m)[m
+Author: Sertan <sertanozcan.tr@gmail.com>
+Date:   Sun Apr 28 23:26:46 2024 +0300
+
+    First Commit
+
+[33mcommit d6c1624bf7d1b238790b7a44b170dd55a5e19422[m
+Author: Sertan Özcan <90261603+sertanozcnn@users.noreply.github.com>
+Date:   Wed Apr 24 00:29:11 2024 +0300
+
+    Initialize project using Create React App
