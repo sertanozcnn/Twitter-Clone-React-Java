@@ -14,6 +14,8 @@ module.exports = {
         '800': '#17275c',
         '700': '#1a3eb3',
         '500': '#09a5ee',
+        '400': '#5ca5fe',
+        '300': '#1d9bf0',
       },
       'gray': {
         '50': '#f9fafb',
@@ -62,7 +64,6 @@ module.exports = {
         'kanit-regular': ["Kanit Regular"],
         'kanit-medium': ["Kanit Medium"],
         'kanit-semibold': ["Kanit SemiBold"],
-        'kanit-thin': ["Kanit Thin"],
       }
 
     },

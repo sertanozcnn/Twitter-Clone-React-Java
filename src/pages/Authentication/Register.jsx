@@ -93,16 +93,16 @@ const Register = () => {
               row
               aria-labelledby="gender"
               name="gender"
-              value={gender} 
+              value={gender}
               onChange={handleChange}
             >
-              <FormControlLabel   
-              style={{ color: 'white' }} 
-              name='female' 
-              value="female" 
-              control={<Radio   style={{ color: 'white' }} />} label="Female" />
-              
-              <FormControlLabel   style={{ color: 'white' }} name='male' value="male" control={<Radio style={{ color: 'white' }} />} label="Male" />
+              <FormControlLabel
+                style={{ color: 'white' }}
+                name='female'
+                value="female"
+                control={<Radio style={{ color: 'white' }} />} label="Female" />
+
+              <FormControlLabel style={{ color: 'white' }} name='male' value="male" control={<Radio style={{ color: 'white' }} />} label="Male" />
               <ErrorMessage name="gender" component="div" className="text-red-500" />
 
             </RadioGroup>
@@ -114,9 +114,16 @@ const Register = () => {
             <div className="flex items-center h-5">
               <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
-            <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{ color: 'white' }}>I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500" style={{ textDecoration: 'underline' }}> terms and conditions</a></label>
+            <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{ color: 'white' }}>I agree with the <a href="#" className="text-gray-100 hover:underline " style={{ textDecoration: 'underline' }}> terms and conditions</a></label>
           </div>
-          <button type="submit" className="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-kanit  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Register</button>
+          <button type="submit"
+            className="w-full text-white bg-blue-800 
+          hover:bg-blue-700  font-kanit 
+           rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Register</button>
+
+          <p class="text-sm font-light text-gray-100 font-kanit justify-center">
+            If you have already account? <a href="/login" class="font-medium text-blue-200 hover:underline">Sign in</a>
+          </p>
 
         </Form>
 
