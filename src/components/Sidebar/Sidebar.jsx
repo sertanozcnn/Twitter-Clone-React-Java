@@ -14,15 +14,15 @@ const Sidebar = () => {
   };
 
   return (
-    <Card className='card h-screen flex flex-col justify-between py-4' style={{backgroundColor:"#211b44"}}>
+    <Card className='card h-screen flex flex-col justify-between py-4 ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }}>
       <div className='space-y-8 pl-4 pr-4'>
         <div className=''>
-          <span className='logo font-bold text-xl  text-gray-50 font-kanit'>mix</span>
+          <img className='size-1/5' src="https://r.resimlink.com/gqN9f.png" alt="" />
         </div>
 
         <div className='space-y-8'>
           {navigationMenu.map((item) => (
-            <div key={item.title} className='cursor-pointer flex space-x-3 items-center  text-gray-50 font-kanit hover:bg-gray-700 rounded-full p-1'> 
+            <div key={item.title} className='cursor-pointer flex space-x-3 items-center  text-gray-50 font-kanit hover:bg-gray-500  rounded-full p-0.5'>
               {item.icon}
               <p className='text-xl '>{item.title}</p>
             </div>
@@ -31,16 +31,20 @@ const Sidebar = () => {
       </div>
 
       <div>
-        <Divider />
+
+
+        <div className='mt-4 ml-4 mr-4'>
+          <Divider style={{ backgroundColor: '#d7dae0' }} />
+        </div>
         <div className='pl-5 flex items-center justify-between pt-5'>
           <div className='flex items-center space-x-3'>
             <Avatar />
             <div>
-              <p className='font-bold'>Sertan Ozcan</p>
-              <p className='opacity-70'>@sertanozcann</p>
+              <p className='font-kanit text-gray-50'>Sertan Ozcan</p>
+              <p className='opacity-70 font-kanit-regular text-gray-200'>@sertanozcann</p>
             </div>
           </div>
-          
+
           <Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
@@ -48,7 +52,7 @@ const Sidebar = () => {
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
           >
-            <MdMoreHoriz size={25} color='black' />
+            <MdMoreHoriz size={25} color='white' />
 
           </Button>
           <Menu

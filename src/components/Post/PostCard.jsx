@@ -12,9 +12,10 @@ import { IoBookmark } from "react-icons/io5";
 
 const PostCard = () => {
   return (
-    <Card className=''>
+    <Card className='mb-4' style={{ backgroundColor: "#211b44" }}>
 
       <CardHeader
+
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             R
@@ -22,15 +23,15 @@ const PostCard = () => {
         }
         action={
           <IconButton aria-label="settings">
-            <IoMdMore />
+            <IoMdMore color='white' />
           </IconButton>
         }
-        title="John Doe"
-        subheader="@johndoe"
+        title={<p className='font-kanit text-gray-50 text-base'>John Doe</p>}
+        subheader={<p className='opacity-70 font-kanit-regular text-sm text-gray-200'>@johndoe</p>}
       />
 
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" className='text-gray-100' fontSize={16} >
           Very Beatiful İmage.
         </Typography>
       </CardContent>
@@ -43,31 +44,31 @@ const PostCard = () => {
       />
 
       <div className='mt-4 ml-2 mr-2'>
-        <Divider />
+        <Divider style={{ backgroundColor: '#d7dae0' }} />
       </div>
 
       <CardActions className='flex justify-between' disableSpacing >
         <div className="flex items-center space-x-32 ">
 
           <IconButton>
-            {<RiChat3Line />}
+            {<RiChat3Line color='#b3bbc6' />}
 
           </IconButton>
 
-          <IconButton>
-            {true ? <MdFavoriteBorder /> : <MdFavorite />}
+          <IconButton >
+            {true ? <MdFavoriteBorder  color='#b3bbc6' /> : <MdFavorite  color='#b3bbc6' />}
 
           </IconButton>
 
 
 
           <IconButton >
-            {<IoShareOutline />}
+            {<IoShareOutline color='#b3bbc6' />}
 
           </IconButton>
 
           <IconButton  >
-            {true ? <IoBookmarkOutline /> : <IoBookmark />}
+            {true ? <IoBookmarkOutline color='#b3bbc6' /> : <IoBookmark color='#b3bbc6' />}
 
           </IconButton>
         </div>
@@ -76,7 +77,7 @@ const PostCard = () => {
 
 
       </CardActions>
-     
+
 
 
     </Card>

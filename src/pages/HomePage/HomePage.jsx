@@ -14,14 +14,14 @@ const HomePage = () => {
   const location = useLocation();
 
   return (
-    <div className='px-40 bg-purpleOn' >
+    <div className='px-40 bg-mainColor-500  '  >
       <Grid container spacing={0}>
         <Grid item xs={0} lg={3}>
-          <div className='sticky top-0'>
+          <div className='sticky top-0 mx-2  '>
             <Sidebar />
           </div>
         </Grid>
-        <Grid lg={location.pathname === "/" ? 6: 9}  xs={12} item className='px-5 flex justify-center' >
+        <Grid lg={location.pathname === "/" ? 6: 9}  xs={12} item className='px-5 flex justify-center ' >
           <Routes>
             <Route path="/" element={<MiddlePart />} />
             <Route path="/reels" element={<Reels />} />
@@ -30,10 +30,10 @@ const HomePage = () => {
           </Routes>
         </Grid>
 
-        <Grid item lg={3} className='relative'>
-          <div className='sticky top-0 w-full'>
+        <Grid item lg={3} className='relative justify-end'>
+          <div className='sticky top-5 w-full mx-2 '>
 
-          <HomeRight/>
+          <HomeRight  />
 
           </div>
 
