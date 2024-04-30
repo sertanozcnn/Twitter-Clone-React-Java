@@ -62,7 +62,6 @@ module.exports = {
         'kanit-regular': ["Kanit Regular"],
         'kanit-medium': ["Kanit Medium"],
         'kanit-semibold': ["Kanit SemiBold"],
-        'kanit-thin': ["Kanit Thin"],
       }
 
     },
