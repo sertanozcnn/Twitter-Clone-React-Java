@@ -52,3 +52,16 @@ code {
 
 
 
+
+::-webkit-scrollbar {
+  width: 12px; /* Scroll çubuğunun genişliği */
+}
+
+::-webkit-scrollbar-track {
+  background: #211b44; /* Scroll çubuğu arka plan rengi */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6b7280; /* Scroll çubuğu tutamaç rengi */
+  border-radius: 6px; /* Scroll çubuğu tutamaç kenar yarıçapı */
+}

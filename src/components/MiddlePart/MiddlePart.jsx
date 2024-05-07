@@ -1,11 +1,12 @@
 import { Avatar, Card, Divider, IconButton } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosAdd } from "react-icons/io";
 import StoryCircle from './StoryCircle';
 import { IoImageOutline } from "react-icons/io5";
 import { IoVideocamOutline } from "react-icons/io5";
 import PostCard from '../Post/PostCard';
 import { MdOutlineArticle } from "react-icons/md";
+import CreatePostModal from '../CreatePost/CreatePostModal';
 
 
 const story = [11, 1, 1, 1, 1, 1];
@@ -13,8 +14,13 @@ const posts = [1, 1, 1, 1, 1];
 
 const MiddlePart = () => {
 
+  const [openCreatePostModal,setOpenCreatePostModal]=useState(false);
+
+  const handleCloseCreatePostModal=() => setOpenCreatePostModal(false);
+
   const handleOpenCreatePostModal = () => {
-    console.log("Open Create Post Modal");
+    setOpenCreatePostModal(true);
+    console.log("Open Create Post Modal",openCreatePostModal);
   }
 
   return (
@@ -40,6 +46,7 @@ const MiddlePart = () => {
          
 
             <input
+            onClick={handleOpenCreatePostModal}
             type='text'
             placeholder="What's going on?"
               class="
@@ -98,6 +105,11 @@ const MiddlePart = () => {
         </div>
 
       </section>
+
+
+      <div>
+        <CreatePostModal handleClose={handleCloseCreatePostModal} open={openCreatePostModal} />
+      </div>
 
 
 
