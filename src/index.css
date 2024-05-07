@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -25,22 +25,23 @@ code {
   @font-face {
     font-family: 'Kanit Bold';
     font-weight: 500;
-    src: url('/assets/font/Kanit-Bold.ttf') format('ttf');
+    src: url('../assets/font/Kanit-Bold.ttf') format('ttf');
   }
   
   @font-face {
-    font-family: 'Kanit Regular';
-    src: url('/assets/font/Kanit-Regular.ttf') format('ttf');
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    src: url('../assets/font/Kanit-Regular.ttf') format('ttf');
   }
   
   @font-face {
     font-family: 'Kanit SemiBold';
-    src: url('/assets/font/Kanit-SemiBold.ttf') format('ttf');
+    src: url('../assets/font/Kanit-SemiBold.ttf') format('ttf');
   }
   
   @font-face {
     font-family: 'Kanit Medium';
-    src: url('/assets/font/Kanit-Medium.ttf') format('ttf');
+    src: url('../assets/font/Kanit-Medium.ttf') format('ttf');
   }
   
 
@@ -51,3 +52,16 @@ code {
 
 
 
+
+::-webkit-scrollbar {
+  width: 12px; /* Scroll çubuğunun genişliği */
+}
+
+::-webkit-scrollbar-track {
+  background: #211b44; /* Scroll çubuğu arka plan rengi */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6b7280; /* Scroll çubuğu tutamaç rengi */
+  border-radius: 6px; /* Scroll çubuğu tutamaç kenar yarıçapı */
+}

@@ -6,29 +6,49 @@ import { useDispatch } from 'react-redux';
 import { registerUserAction } from '../../Redux/Auth/auth.action';
 
 
-const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: "" }
+
+const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: ""   }
+
+
 const validationSchema = {
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 };
+
+
+// const COLORS = [
+//   "#AB48BE", "#7B1FA2", "#79929E", "#455A65", "#EC407A",
+//   "#C1175A", "#5D6AC0", "#0388D2", "#0098A7", "#689F39",
+//   "#34691E", "#8C6E63", "#EF6C00", "#F6511E", "#BF360E"
+// ];
+
+// const generateRandomColor = () => {
+//   const randomIndex = Math.floor(Math.random() * COLORS.length);
+//   return COLORS[randomIndex];
+// };
+
+
+
+
 const Register = () => {
 
   const [gender, setGender] = useState("");
+
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    // Değerleri kopyala
     const updatedValues = { ...values };
-    // Gender değerini atayıp kopyayı kullan
     updatedValues.gender = gender;
+    //updatedValues.randomProfileColorCode = generateRandomColor();
+
     console.log("handle submit", updatedValues);
-    // Güncellenmiş değerleri kullan
-    dispatch(registerUserAction({ data: updatedValues }))
+    dispatch(registerUserAction({ data: updatedValues }));
   };
 
   const handleChange = (event) => {
     console.log(event.target.value); // Değeri kontrol etmek için konsola yazdırın
     setGender(event.target.value);
+
   };
 
   return (
@@ -55,6 +75,10 @@ const Register = () => {
               <ErrorMessage name="firstName" component={"div"} className='text-red-500' />
 
             </div>
+
+          
+
+
 
             <div>
               <label htmlFor="lastName" className="block mb-1 text-sm font-kanit ml-1" style={{ color: 'white' }}>Last Name</label>
@@ -93,19 +117,24 @@ const Register = () => {
               row
               aria-labelledby="gender"
               name="gender"
-              value={gender} 
+              value={gender}
               onChange={handleChange}
             >
-              <FormControlLabel   
-              style={{ color: 'white' }} 
-              name='female' 
-              value="female" 
-              control={<Radio   style={{ color: 'white' }} />} label="Female" />
-              
-              <FormControlLabel   style={{ color: 'white' }} name='male' value="male" control={<Radio style={{ color: 'white' }} />} label="Male" />
+              <FormControlLabel
+                style={{ color: 'white' }}
+                name='female'
+                value="female"
+                control={<Radio style={{ color: 'white' }} />} label="Female" />
+
+              <FormControlLabel style={{ color: 'white' }} name='male' value="male" control={<Radio style={{ color: 'white' }} />} label="Male" />
               <ErrorMessage name="gender" component="div" className="text-red-500" />
 
             </RadioGroup>
+
+
+
+           
+          
 
 
           </div>
@@ -114,9 +143,16 @@ const Register = () => {
             <div className="flex items-center h-5">
               <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
-            <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{ color: 'white' }}>I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500" style={{ textDecoration: 'underline' }}> terms and conditions</a></label>
+            <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{ color: 'white' }}>I agree with the <a href="#" className="text-gray-100 hover:underline " style={{ textDecoration: 'underline' }}> terms and conditions</a></label>
           </div>
-          <button type="submit" className="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-kanit  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Register</button>
+          <button type="submit"
+            className="w-full text-white bg-blue-800 
+          hover:bg-blue-700  font-kanit 
+           rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Register</button>
+
+          <p class="text-sm font-light text-gray-100 font-kanit justify-center">
+            If you have already account? <a href="/login" class="font-medium text-blue-200 hover:underline">Sign in</a>
+          </p>
 
         </Form>
 
