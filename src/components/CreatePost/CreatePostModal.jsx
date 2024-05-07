@@ -4,9 +4,11 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Avatar, Backdrop, CircularProgress, Divider, IconButton, TextField } from '@mui/material';
+import { Avatar, CircularProgress, Divider, IconButton, TextField } from '@mui/material';
 import { IoIosClose } from "react-icons/io";
 import { IoImageOutline, IoVideocamOutline } from 'react-icons/io5';
+import { uploadToCloudinary } from '../../utils/uploadToCloudniry';
+import { createPostAction } from '../../Redux/Post/post.action';
 
 const style = {
     position: 'absolute',
@@ -25,12 +27,14 @@ const style = {
 
 const CreatePostModal = ({ handleClose, open }) => {
     const dispatch = useDispatch();
+    const { auth } = useSelector(store => store);
     const [loading, setLoading] = React.useState(false);
 
 
     const handleSubmit = async (values) => {
         setLoading(true);
         await new Promise(resolve => setTimeout(resolve, 1000)); // 3 saniye bekletme
+        dispatch(createPostAction(values))
         setLoading(false);
         handleClose();
         console.log("formik values", values);
@@ -48,10 +52,23 @@ const CreatePostModal = ({ handleClose, open }) => {
 
     const [selectedImage, setSelectedImage] = useState();
     const [selectedVideo, setSelectedVideo] = useState();
-    const handleSelectImage = () => {
+    const handleSelectImage = async (event) => {
+
+        setLoading(true);
+        const imageUrl = await uploadToCloudinary(event.target.files[0], "image");
+        setSelectedImage(imageUrl);
+        setLoading(false);
+        formik.setFieldValue("image", imageUrl);
 
     }
-    const handleSelectVideo = () => {
+    const handleSelectVideo = async (event) => {
+
+        setLoading(true);
+        const videoUrl = await uploadToCloudinary(event.target.files[0], "video");
+        setSelectedVideo(videoUrl);
+        setLoading(false);
+        formik.setFieldValue("video", videoUrl);
+
 
     }
 
@@ -81,7 +98,10 @@ const CreatePostModal = ({ handleClose, open }) => {
 
                         <div className='space-y-2 block w-full flex justify-between'>
 
-                            <Avatar className='' />
+
+                            <Avatar sx={{ bgcolor: auth?.user.randomProfileColorCode }} aria-label="recipe">
+                                <span >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+                            </Avatar>
 
 
 
@@ -120,17 +140,22 @@ const CreatePostModal = ({ handleClose, open }) => {
                         </div>
 
 
-                        <div className='flex justify-start space-x-10 mt-3 '>
+                        <div className='flex justify-start space-x-3 mt-3 '>
 
 
                             <div className='flex items-center'>
+
+                                <input
+                                    type='file'
+                                    accept='image/*'
+                                    onChange={handleSelectImage}
+                                    style={{ display: "none" }}
+                                    id='image-input'
+                                />
+
                                 <label htmlFor='image-input'>
                                     <IconButton color='primary'
-
-                                        type='file'
-                                        accept='image/*'
-                                        onChange={handleSelectImage}
-                                        id='image-input'
+                                        component="span"
                                     >
                                         <IoImageOutline style={{ color: '#b3bbc6' }} />
                                     </IconButton>
@@ -140,18 +165,23 @@ const CreatePostModal = ({ handleClose, open }) => {
                             </div>
 
 
-                            <div className='flex items-center'>
-                            <label htmlFor='video-input'>
-                                <IconButton color='primary'
+                            <div className='flex items-center  '>
 
+                                <input
                                     type='file'
-                                    accept='video/*'
-                                    onChange={handleSelectVideo}
+                                    accept='image/*'
+                                    onChange={handleSelectImage}
                                     style={{ display: "none" }}
-                                    id='video-input'
-                                >
-                                    <IoVideocamOutline style={{ color: '#b3bbc6' }} />
-                                </IconButton>
+                                    id='image-input'
+                                />
+
+                                <label htmlFor='video-input'>
+                                    <IconButton color='primary'
+
+                                        component="span"
+                                    >
+                                        <IoVideocamOutline style={{ color: '#b3bbc6' }} />
+                                    </IconButton>
                                 </label>
                                 <span className='font-kanit-regular text-gray-300'>Video</span>
                             </div>
@@ -222,7 +252,7 @@ const CreatePostModal = ({ handleClose, open }) => {
                         }
 
 
-                    
+
 
 
 

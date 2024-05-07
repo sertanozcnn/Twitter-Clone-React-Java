@@ -23,7 +23,7 @@ const HomePage = () => {
 
   const {auth} = useSelector(store=>store);
 
-  console.log("auth", auth);
+  //console.log("auth", auth);
 
 
   useEffect(() => {

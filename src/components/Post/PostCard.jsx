@@ -10,36 +10,49 @@ import { IoBookmarkOutline } from "react-icons/io5";
 import { IoBookmark } from "react-icons/io5";
 
 
-const PostCard = () => {
+const PostCard = ({ item }) => {
+
+  if (!item || !item.user) {
+    return <div>Error: User information not found</div>;
+  }
+
   return (
     <Card className='' style={{ backgroundColor: "#211b44" }}>
 
       <CardHeader
 
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Avatar sx={{ bgcolor: item.user.randomProfileColorCode }} aria-label="recipe">
+            <span >{item.user.firstName.charAt(0).toUpperCase()}</span>
           </Avatar>
+
+      // <Avatar sx={{ bgcolor: auth?.user.randomProfileColorCode }} aria-label="recipe">
+      // <span >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+      // </Avatar>
         }
         action={
           <IconButton aria-label="settings">
             <IoMdMore color='white' />
           </IconButton>
         }
-        title={<p className='font-kanit text-gray-50 text-base'>John Doe</p>}
-        subheader={<p className='opacity-70 font-kanit-regular text-sm text-gray-200'>@johndoe</p>}
+        title={<p className='font-kanit text-gray-50 text-base'>{item.user.firstName + " " + item.user.lastName}</p>}
+        subheader={<p className='opacity-70 font-kanit-regular text-sm text-gray-200'>
+
+          @{item.user.nickname || item.user.firstName.toLowerCase() + "_" + item.user.lastName.toLowerCase()}
+
+        </p>}
       />
 
       <CardContent>
         <Typography variant="body2" className='text-gray-100' fontSize={16} >
-          Very Beatiful İmage.
+          {item.caption}
         </Typography>
       </CardContent>
 
       <CardMedia
         component="img"
         height="194"
-        image="https://images.pexels.com/photos/21974391/pexels-photo-21974391/free-photo-of-urun-fotografciligi.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+        image={item.image}
         alt="Paella dish"
       />
 
@@ -56,7 +69,7 @@ const PostCard = () => {
           </IconButton>
 
           <IconButton >
-            {true ? <MdFavoriteBorder  color='#b3bbc6' /> : <MdFavorite  color='#b3bbc6' />}
+            {true ? <MdFavoriteBorder color='#b3bbc6' /> : <MdFavorite color='#b3bbc6' />}
 
           </IconButton>
 

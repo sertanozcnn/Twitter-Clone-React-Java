@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { updateProfileAction } from '../../Redux/Auth/auth.action';
-import { Avatar, CircularProgress, IconButton, TextField } from '@mui/material';
+import { Avatar, CircularProgress, IconButton } from '@mui/material';
 import { IoIosClose } from "react-icons/io";
 
 const style = {

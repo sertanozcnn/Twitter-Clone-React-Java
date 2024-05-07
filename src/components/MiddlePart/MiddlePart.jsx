@@ -1,5 +1,5 @@
 import { Avatar, Card, Divider, IconButton } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosAdd } from "react-icons/io";
 import StoryCircle from './StoryCircle';
 import { IoImageOutline } from "react-icons/io5";
@@ -7,6 +7,8 @@ import { IoVideocamOutline } from "react-icons/io5";
 import PostCard from '../Post/PostCard';
 import { MdOutlineArticle } from "react-icons/md";
 import CreatePostModal from '../CreatePost/CreatePostModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPostAction } from '../../Redux/Post/post.action';
 
 
 const story = [11, 1, 1, 1, 1, 1];
@@ -14,14 +16,22 @@ const posts = [1, 1, 1, 1, 1];
 
 const MiddlePart = () => {
 
-  const [openCreatePostModal,setOpenCreatePostModal]=useState(false);
+  const dispatch = useDispatch();
+  const { post } = useSelector(store => store);
 
-  const handleCloseCreatePostModal=() => setOpenCreatePostModal(false);
+  const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
+  const { auth } = useSelector(store => store);
+  console.log("Post Store",post);
+  const handleCloseCreatePostModal = () => setOpenCreatePostModal(false);
 
   const handleOpenCreatePostModal = () => {
     setOpenCreatePostModal(true);
-    console.log("Open Create Post Modal",openCreatePostModal);
+    console.log("Open Create Post Modal", openCreatePostModal);
   }
+
+  useEffect(() => {
+    dispatch(getAllPostAction())
+  }, [])
 
   return (
     <div className='px-20'>
@@ -39,16 +49,18 @@ const MiddlePart = () => {
       </section>
 
       <section ck>
-        <Card className='p-4 mt-5 '  style={{backgroundColor:"#211b44"}}>
+        <Card className='p-4 mt-5 ' style={{ backgroundColor: "#211b44" }}>
           <div className='flex justify-between'>
 
-            <Avatar className='' />
-         
+            <Avatar sx={{ bgcolor: auth?.user.randomProfileColorCode }} aria-label="recipe">
+              <span >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+            </Avatar>
+
 
             <input
-            onClick={handleOpenCreatePostModal}
-            type='text'
-            placeholder="What's going on?"
+              onClick={handleOpenCreatePostModal}
+              type='text'
+              placeholder="What's going on?"
               class="
               mr-4
               text-lg
@@ -64,7 +76,7 @@ const MiddlePart = () => {
           </div>
 
           <div className='mt-4 ml-2 mr-2'>
-            <Divider style={{backgroundColor:'#d7dae0'}} />
+            <Divider style={{ backgroundColor: '#d7dae0' }} />
           </div>
 
           <div className='flex justify-center space-x-10 mt-2'>
@@ -72,7 +84,7 @@ const MiddlePart = () => {
 
             <div className='flex items-center'>
               <IconButton color='primary' onClick={handleOpenCreatePostModal}>
-                <IoImageOutline  style={{color:'#b3bbc6'}} />
+                <IoImageOutline style={{ color: '#b3bbc6' }} />
               </IconButton>
               <span className='font-kanit-regular text-gray-300' >Media</span>
 
@@ -81,7 +93,7 @@ const MiddlePart = () => {
 
             <div className='flex items-center'>
               <IconButton color='primary' onClick={handleOpenCreatePostModal}>
-                <IoVideocamOutline  style={{color:'#b3bbc6'}} />
+                <IoVideocamOutline style={{ color: '#b3bbc6' }} />
               </IconButton>
               <span className='font-kanit-regular text-gray-300'>Video</span>
             </div>
@@ -89,7 +101,7 @@ const MiddlePart = () => {
 
             <div className='flex items-center'>
               <IconButton color='primary' onClick={handleOpenCreatePostModal}>
-                <MdOutlineArticle   style={{color:'#b3bbc6'}}/>
+                <MdOutlineArticle style={{ color: '#b3bbc6' }} />
               </IconButton>
               <span className='font-kanit-regular text-gray-300'>Write</span>
             </div>
@@ -99,7 +111,7 @@ const MiddlePart = () => {
 
         </Card>
         <div className='mt-5 space-y-5 mb-4' >
-          {posts.map((item) => <PostCard />)}
+          {post.posts.map((item) => <PostCard item={item}/>)}
 
 
         </div>
