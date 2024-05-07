@@ -2,16 +2,35 @@
 
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MiddlePart from '../../components/MiddlePart/MiddlePart';
 import Reels from '../../components/Reels/Reels';
 import CreateReelsForm from '../../components/Reels/CreateReelsForm';
 import Profile from '../Profile/Profile';
 import HomeRight from '../../components/HomeRight/HomeRight';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileAction } from '../../Redux/Auth/auth.action';
+import { store } from '../../Redux/store';
 
 const HomePage = () => {
+
+  const dispatch = useDispatch();
+
   const location = useLocation();
+
+  const jwt = localStorage.getItem('jwt');
+
+  const {auth} = useSelector(store=>store);
+
+  console.log("auth", auth);
+
+
+  useEffect(() => {
+      dispatch(getProfileAction(jwt))
+
+  },[])
+
 
   return (
     <div className='px-40 bg-mainColor-500  '  >

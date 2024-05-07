@@ -24,12 +24,12 @@ export const navigationMenu = [
     {
         title: "Reels",
         icon: <MdOutlineExplore   size={28} />,
-        path: "/",
+        path: "/reels",
     },
     {
         title: "Create Reels",
         icon: <MdAddCircleOutline   size={26}/>,
-        path: "/",
+        path: "/create-reels",
     },
     {
         title: "Notifications",
@@ -39,7 +39,7 @@ export const navigationMenu = [
     {
         title: "Message",
         icon: <BiMessageDetail  size={26} />,
-        path: "/",
+        path: "/message",
     },
     {
         title: "Lists",
@@ -54,7 +54,7 @@ export const navigationMenu = [
     {
         title: "Profile",
         icon: <MdOutlineAccountCircle  size={28} />,
-        path: "/profile/1",
+        path: "/profile",
     },
 
 ]

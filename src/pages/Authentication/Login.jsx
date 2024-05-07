@@ -65,6 +65,7 @@ const Login = () => {
             className="w-full text-white bg-blue-800 
           hover:bg-blue-700  font-kanit 
            rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Login</button>
+           
           <button type="submit"
             className="w-full text-white 
           bg-white border border-gray-300  font-kanit  

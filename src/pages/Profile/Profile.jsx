@@ -1,9 +1,11 @@
 import { Avatar, Box, Button, Card, Tab, Tabs } from '@mui/material';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PostCard from '../../components/Post/PostCard';
 import UserReelCard from '../../components/Reels/UserReelCard';
-
+import { useDispatch, useSelector } from 'react-redux';
+import ProfileModal from '../Profile/ProfileModal';
+import { getProfileAction, userFollowersCount, userFollowingsCount, userGetPostCount } from '../../Redux/Auth/auth.action';
 
 const tabs = [
   { value: "post", name: "Post", },
@@ -18,10 +20,39 @@ const savedPost = [1, 1, 1];
 
 const Profile = () => {
   const { id } = useParams();
-  const [value, setValue] = React.useState('post');
+
+  const { auth } = useSelector(store => store);
+  const [open, setOpen] = useState(false);
+  const handleOpenProfileModal = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [value, setValue] = useState("post");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfileAction(localStorage.getItem('jwt')));
+    dispatch(userGetPostCount(localStorage.getItem('jwt'), auth.user?.id));
+    dispatch(userFollowingsCount(localStorage.getItem('jwt'), auth.user?.id));
+    dispatch(userFollowersCount(localStorage.getItem('jwt'), auth.user?.id));
+  }, []);
+
+  console.log("auth", auth);
+
+
+  const postCount = auth.postCount;
+  const followingsCount = auth.followingsCount;
+  const followersCount = auth.followersCount;
+
+
+
+
 
   return (
     <Card className=' w-[80%] ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }} >
@@ -31,13 +62,13 @@ const Profile = () => {
 
 
           <div className='flex items-start'  >
-            <h1 className='font-kanit  text-gray-50 text-2xl font-bold' >John Doe</h1>
+            <h1 className='font-kanit  text-gray-50 text-2xl font-bold' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
           </div>
 
           <div>
 
             <span className='text-gray-400 font-kanit' >
-              <span className=''>4.165</span>
+              <span className=''>{postCount}</span>
               <span > Post</span>
             </span>
 
@@ -54,13 +85,16 @@ const Profile = () => {
 
           <Avatar
             withBorder={true}
-            sx={{ width: "10rem", height: "10rem" }}
+            sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.randomProfileColorCode }}
             className='transform -translate-y-24  rounded-full ring-2 ring-gray-700 dark:ring-gray-800 '
-            src='' />
+            src='' >
+            <span className='text-5xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+
+          </Avatar>
 
 
           {true ? (
-            <Button class="
+            <Button onClick={handleOpenProfileModal} class="
             text-gray-100 bg-white border border-gray-300  font-kanit rounded-full 
             text-sm px-5 py-2.5 me-2 mb-2  dark:text-white dark:border-gray-700 
             dark:hover:bg-gray-700 dark:hover:border-gray-600 ">
@@ -80,13 +114,18 @@ const Profile = () => {
         <div className='px-5'>
 
           <div>
-            <h1 className='font-kanit  text-gray-50 text-xl' >John Doe</h1>
-            <p className='opacity-70 font-kanit-regular text-gray-200' >@johndoe</p>
+            <h1 className='font-kanit  text-gray-50 text-xl' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
+            <p className='opacity-70 font-kanit-regular text-gray-200' >
+
+              @{auth.user?.nickname || auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}
+
+
+            </p>
           </div>
 
 
           <div >
-            <p className='text-gray-100 py-5' >Content</p>
+            <p className='text-gray-100 py-5' >{auth.user?.content}</p>
           </div>
 
           <div className='flex gap-2 items-center'>
@@ -97,14 +136,14 @@ const Profile = () => {
 
             <a href='/following' className='hover:underline' style={{ color: 'white' }} >
               <span className='text-gray-100 font-kanit' >
-                <span className='font-bold'>159</span>
+                <span className='font-bold'>{followingsCount}</span>
                 <span > Following</span>
               </span>
             </a>
 
             <a href='/followers' className='hover:underline' style={{ color: 'white' }} >
               <span className='text-gray-100 font-kanit' >
-                <span className='font-bold'>250</span>
+                <span className='font-bold'>{followersCount}</span>
                 <span> Followers</span>
               </span>
             </a>
@@ -162,13 +201,18 @@ const Profile = () => {
 
                   <div className='mt-5 text-gray-100 font-kanit'>Repost</div>
                 )}
-  
+
 
 
           </div>
         </section>
-
       </div>
+
+      <section>
+        <ProfileModal open={open} handleClose={handleClose} initialValues={auth.user} />
+      </section>
+
+
     </Card>
   )
 }

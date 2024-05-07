@@ -6,29 +6,49 @@ import { useDispatch } from 'react-redux';
 import { registerUserAction } from '../../Redux/Auth/auth.action';
 
 
-const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: "" }
+
+const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: ""   }
+
+
 const validationSchema = {
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 };
+
+
+// const COLORS = [
+//   "#AB48BE", "#7B1FA2", "#79929E", "#455A65", "#EC407A",
+//   "#C1175A", "#5D6AC0", "#0388D2", "#0098A7", "#689F39",
+//   "#34691E", "#8C6E63", "#EF6C00", "#F6511E", "#BF360E"
+// ];
+
+// const generateRandomColor = () => {
+//   const randomIndex = Math.floor(Math.random() * COLORS.length);
+//   return COLORS[randomIndex];
+// };
+
+
+
+
 const Register = () => {
 
   const [gender, setGender] = useState("");
+
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    // Değerleri kopyala
     const updatedValues = { ...values };
-    // Gender değerini atayıp kopyayı kullan
     updatedValues.gender = gender;
+    //updatedValues.randomProfileColorCode = generateRandomColor();
+
     console.log("handle submit", updatedValues);
-    // Güncellenmiş değerleri kullan
-    dispatch(registerUserAction({ data: updatedValues }))
+    dispatch(registerUserAction({ data: updatedValues }));
   };
 
   const handleChange = (event) => {
     console.log(event.target.value); // Değeri kontrol etmek için konsola yazdırın
     setGender(event.target.value);
+
   };
 
   return (
@@ -55,6 +75,10 @@ const Register = () => {
               <ErrorMessage name="firstName" component={"div"} className='text-red-500' />
 
             </div>
+
+          
+
+
 
             <div>
               <label htmlFor="lastName" className="block mb-1 text-sm font-kanit ml-1" style={{ color: 'white' }}>Last Name</label>
@@ -106,6 +130,11 @@ const Register = () => {
               <ErrorMessage name="gender" component="div" className="text-red-500" />
 
             </RadioGroup>
+
+
+
+           
+          
 
 
           </div>
