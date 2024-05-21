@@ -7,6 +7,10 @@ import { useFormik } from 'formik';
 import { updateProfileAction } from '../../Redux/Auth/auth.action';
 import { Avatar, CircularProgress, IconButton } from '@mui/material';
 import { IoIosClose } from "react-icons/io";
+import { IoImageOutline } from 'react-icons/io5';
+import { MdAddAPhoto } from 'react-icons/md';
+import { uploadToCloudinary } from '../../utils/uploadToCloudniry';
+import { useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -27,6 +31,8 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
   const dispatch = useDispatch();
   const { auth } = useSelector(store => store);
   const [loading, setLoading] = React.useState(false);
+  const [selectedImage, setSelectedImage] = useState();
+
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -35,6 +41,17 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
     setLoading(false);
     handleClose();
   }
+
+  const handleSelectImage = async (event) => {
+
+    setLoading(true);
+    const imageUrl = await uploadToCloudinary(event.target.files[0], "image");
+    setSelectedImage(imageUrl);
+    setLoading(false);
+    formik.setFieldValue("image", imageUrl);
+
+  }
+
   const formik = useFormik({
     initialValues, // initialValues prop'unu burada kullanın
     onSubmit: handleSubmit,
@@ -79,15 +96,52 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
                 <img src='https://images.pexels.com/photos/592077/pexels-photo-592077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='w-full h-full rounded-t-md' />
 
               </div>
-              <div className='pl-5'>
-                <Avatar className='transform -translate-y-24 ring-2 ring-gray-700 dark:ring-gray-800'
-                  sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.randomProfileColorCode }}
-                  src=''
+
+
+              <div className='pl-5 relative ' >
+
+
+                <Avatar className='transform -translate-y-24 ring-4 ring-gray-500 dark:ring-gray-800  '
+                  sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.image ? "transparent" : auth?.user.randomProfileColorCode }}
+                  src={auth?.user.image || selectedImage || ''}
+
+
                 >
-                  <span className='text-5xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+
+                  {!auth?.user.image && (
+                    <span className='text-5xl'>{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+                  )}
+
+                  <input
+                    type='file'
+                    accept='image/*'
+                    onChange={handleSelectImage}
+                    style={{ display: "none" }}
+                    id="avatarInput"
+                    name='image'
+
+                  />
+
+
+
+
+
                 </Avatar>
+
+
+                <label htmlFor='avatarInput' className='absolute bottom-1 right-1'>
+                  <IconButton color='primary' component="span">
+                    <MdAddAPhoto style={{ color: '#b3bbc6' }} size={30} />
+                  </IconButton>
+                </label>
+
+
               </div>
+
             </div>
+
+
+
 
             <div className='space-y-3 block w-full'>
 

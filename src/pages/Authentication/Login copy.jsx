@@ -1,39 +1,67 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import * as Yup from "yup";
-import { loginUserAction } from '../../Redux/Auth/auth.action';
+'use client'
 
-const initialValues = { email: "", password: "" }
+import { useState, useRef, Fragment } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import Image from 'next/image'
 
-const Login = () => {
-  const dispatch = useDispatch();
-
-  const handleSubmit = (values) => {
-    console.log("handle submit", values);
-    dispatch(loginUserAction({ data: values }))
-  };
+export default function ModalVideo() {
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
 
   return (
-    <>
-      <form className="max-w-sm mx-auto">
-        <div className="mb-5">
-          <label htmlFor="email" className="block mb-2 text-sm font-kanit ml-1" style={{color:'white'}}>Email</label>
-          <input type="email" id="email"  className="shadow-sm bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required />
-        </div>
-        <div className="mb-5">
-          <label htmlFor="password" className="block mb-2 text-sm font-kanit  ml-1" style={{color:'white'}}>Password</label>
-          <input type="password" id="password" className="shadow-sm bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light" required />
-        </div>
-        <div className="flex items-start mb-5">
-          <div className="flex items-center h-5">
-            <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-          </div>
-          <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{color:'white'}}>I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500" style={{textDecoration:'underline'}}> terms and conditions</a></label>
-        </div>
-        <button type="submit" className="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-kanit  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{color:'white'}}>Login</button>
-      </form>
-    </>
+    <div>
+
+      {/* 1. The button */}
+      <button
+        className="relative flex justify-center items-center focus:outline-none focus-visible:ring focus-visible:ring-indigo-300 rounded-3xl group"
+        onClick={() => { setModalOpen(true) }}
+        aria-label="Watch the video"
+      >
+        <Image className="rounded-3xl shadow-2xl transition-shadow duration-300 ease-in-out" src={thumb} width={thumbWidth} height={thumbHeight} priority alt="Modal video thumbnail" />
+        {/* Play icon */}
+        <svg className="absolute pointer-events-none group-hover:scale-110 transition-transform duration-300 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+          <circle className="fill-white" cx="36" cy="36" r="36" fillOpacity=".8" />
+          <path className="fill-indigo-500 drop-shadow-2xl" d="M44 36a.999.999 0 0 0-.427-.82l-10-7A1 1 0 0 0 32 29V43a.999.999 0 0 0 1.573.82l10-7A.995.995 0 0 0 44 36V36c0 .001 0 .001 0 0Z" />
+        </svg>
+      </button>
+
+      <Transition show={modalOpen} as={Fragment} afterEnter={() => videoRef.current?.play()}>
+        <Dialog initialFocus={videoRef} onClose={() => setModalOpen(false)}>
+
+          {/* 2. The backdrop layer */}
+          <Transition.Child
+            className="fixed inset-0 z-[99999] bg-black bg-opacity-50 transition-opacity"
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition ease-out duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            aria-hidden="true"
+          />
+
+          {/* 3. The modal video */}
+          <Transition.Child
+            className="fixed inset-0 z-[99999] flex p-6"
+            enter="transition ease-out duration-300"
+            enterFrom="opacity-0 scale-75"
+            enterTo="opacity-100 scale-100"
+            leave="transition ease-out duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-75"
+          >
+            <div className="max-w-5xl mx-auto h-full flex items-center">
+              <Dialog.Panel className="w-full max-h-full rounded-3xl shadow-2xl aspect-video bg-black overflow-hidden">
+                <video ref={videoRef} width="1920" height="1080" loop controls>
+                  <source src="/video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </Dialog.Panel>
+            </div>
+          </Transition.Child>
+
+        </Dialog>
+      </Transition>
+
+    </div>
   )
 }
-
-export default Login;

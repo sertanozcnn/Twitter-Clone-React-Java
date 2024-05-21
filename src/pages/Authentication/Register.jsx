@@ -1,48 +1,88 @@
-import { Button, TextField, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import {Alert, Button, TextField, Radio, RadioGroup, FormControlLabel, CircularProgress } from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
 import { registerUserAction } from '../../Redux/Auth/auth.action';
 
 
 
-const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: ""   }
+
+function GradientCircularProgress() {
+  return (
+    <React.Fragment>
+      <svg width={0} height={0}>
+        <defs>
+          <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#C8865B" />
+            <stop offset="100%" stopColor="#F58943" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <CircularProgress thickness={6} sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
+    </React.Fragment>
+  );
+}
 
 
-const validationSchema = {
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-};
 
-
-// const COLORS = [
-//   "#AB48BE", "#7B1FA2", "#79929E", "#455A65", "#EC407A",
-//   "#C1175A", "#5D6AC0", "#0388D2", "#0098A7", "#689F39",
-//   "#34691E", "#8C6E63", "#EF6C00", "#F6511E", "#BF360E"
-// ];
-
-// const generateRandomColor = () => {
-//   const randomIndex = Math.floor(Math.random() * COLORS.length);
-//   return COLORS[randomIndex];
-// };
+const initialValues = { firstName: "", lastName: "", email: "", password: "", gender: "" }
 
 
 
 
 const Register = () => {
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        setSuccess('');
+      }, 4000);
+      return () => clearTimeout(timer);
+
+    }
+
+  }, [success]);
+
+
   const [gender, setGender] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    setError('');
     const updatedValues = { ...values };
     updatedValues.gender = gender;
-    //updatedValues.randomProfileColorCode = generateRandomColor();
+
 
     console.log("handle submit", updatedValues);
-    dispatch(registerUserAction({ data: updatedValues }));
+
+    try {
+      await dispatch(registerUserAction({ data: updatedValues }));
+
+      setTimeout(() =>{
+        setLoading(false);
+        window.location.href = '/';
+        setSuccess('Registered successfully');
+
+      },4000);
+
+    }catch (err) {
+      setLoading(false);
+      setError('Something went wrong');
+      setTimeout(() =>{
+        setError('');
+      },3000);
+
+    }
+
+
   };
 
   const handleChange = (event) => {
@@ -56,7 +96,22 @@ const Register = () => {
 
       <Formik
         initialValues={initialValues}
-        //validationSchema={validationSchema}
+        validate={(values) => {
+          const errors = {};
+          if (!values.firstName.trim()) {
+            errors.firstName = 'Invalid First Name';
+          }
+          if (!values.lastName.trim()) {
+            errors.lastName = 'Invalid Last Name';
+          }
+          if (!values.email.includes('@')) {
+            errors.email = 'Invalid Email Address';
+          }
+          if (values.password.length < 6) {
+            errors.password = 'Password must be at least 6 characters';
+          }
+          return errors;
+        }}
 
         onSubmit={handleSubmit}
 
@@ -72,11 +127,11 @@ const Register = () => {
                 name="firstName"
                 className=" shadow-sm bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light"
                 type="text" variant="outlined" fullWidth />
-              <ErrorMessage name="firstName" component={"div"} className='text-red-500' />
+              <ErrorMessage name="firstName" component={"div"} className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </div>
 
-          
+
 
 
 
@@ -87,7 +142,7 @@ const Register = () => {
                 name="lastName"
                 className=" shadow-sm bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light"
                 type="text" variant="outlined" fullWidth />
-              <ErrorMessage name="lastName" component="div" className='text-red-500' />
+              <ErrorMessage name="lastName" component="div" className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </div>
 
@@ -98,7 +153,7 @@ const Register = () => {
                 name="email"
                 className=" shadow-sm bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light"
                 placeholder="socialmix@gmail.com" type="email" variant="outlined" fullWidth />
-              <ErrorMessage name="email" component={"div"} className='text-red-500' />
+              <ErrorMessage name="email" component={"div"} className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </div>
 
@@ -109,7 +164,7 @@ const Register = () => {
                 name="password"
                 className=" shadow-sm bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light"
                 type="password" variant="outlined" fullWidth />
-              <ErrorMessage name="password" component="div" className='text-red-500' />
+              <ErrorMessage name="password" component="div" className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </div>
 
@@ -127,14 +182,14 @@ const Register = () => {
                 control={<Radio style={{ color: 'white' }} />} label="Female" />
 
               <FormControlLabel style={{ color: 'white' }} name='male' value="male" control={<Radio style={{ color: 'white' }} />} label="Male" />
-              <ErrorMessage name="gender" component="div" className="text-red-500" />
+              <ErrorMessage name="gender" component="div" className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </RadioGroup>
 
 
 
-           
-          
+
+
 
 
           </div>
@@ -159,6 +214,44 @@ const Register = () => {
 
 
       </Formik>
+
+
+      {loading && (
+        <div
+          className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-black bg-opacity-50"
+          style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+          }}
+        >
+          <GradientCircularProgress thickness={6} />
+        </div>
+      )}
+
+      {error && (
+        <div
+          className="fixed bottom-4 left-0 right-0 flex justify-center"
+        >
+          <Alert
+            variant="filled" 
+            severity="error"
+            style={{ color: 'white' }}
+          >
+            {error}
+          </Alert>
+        </div>
+      )}
+
+{success && (
+        <div className="fixed bottom-4 left-0 right-0 flex justify-center">
+          <Alert variant="filled" severity="success" style={{ color: 'white' }}>
+            {success}
+          </Alert>
+        </div>
+      )}
+
 
     </>
   )

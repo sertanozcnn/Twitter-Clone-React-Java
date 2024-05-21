@@ -65,3 +65,23 @@ code {
   background-color: #6b7280; /* Scroll çubuğu tutamaç rengi */
   border-radius: 6px; /* Scroll çubuğu tutamaç kenar yarıçapı */
 }
+
+.post-card-content {
+  max-width:36rem;
+   /* İçeriğin maksimum yüksekliği */
+  overflow-y: auto; /* Dikey kaydırma çubuğunu içeriğin sığmadığı durumlarda göster */
+}
+
+
+.postcard-chat:hover {
+  color: #1d9bf0;
+}
+
+.postcard-heart:hover{
+  color: #f91880;
+}
+
+
+.postcard-share:hover{
+  color: #00ba7c;
+}

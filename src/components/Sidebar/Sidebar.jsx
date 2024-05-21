@@ -1,35 +1,96 @@
-import React, { useState } from 'react'; // useState import edildi
+import React, { useEffect, useState } from 'react'; // useState import edildi
 import { navigationMenu } from './SidebarNavigation';
-import { Avatar, Button, Card, Divider, Menu, MenuItem } from '@mui/material';
-import { MdMoreHoriz } from "react-icons/md";
-import { useSelector } from 'react-redux';
+import { Alert, Avatar, Button, Card, CircularProgress, Divider, ListItem, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { MdAccountCircle, MdMoreHoriz, MdOutlineLogout } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { red } from '@mui/material/colors';
+import { logoutUserAction } from '../../Redux/Auth/auth.action';
+
+function GradientCircularProgress() {
+  return (
+    <React.Fragment>
+      <svg width={0} height={0}>
+        <defs>
+          <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#C8865B" />
+            <stop offset="100%" stopColor="#F58943" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <CircularProgress thickness={6} sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
+    </React.Fragment>
+  );
+}
+
+
 
 const Sidebar = () => {
-  const {auth} = useSelector(store=>store);
+  const { auth } = useSelector(store => store);
   const [anchorEl, setAnchorEl] = useState(null); // useState kullanıldı ve yanlış parantez düzeltildi
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState('');
+
+
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        setSuccess('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
+  const handleLogout = async () => {
+    setLoading(true);
+
+    try {
+      await dispatch(logoutUserAction()); // logoutUserAction dispatch ediliyor
+
+
+    
+
+      setTimeout(() => {
+        setLoading(false);
+        window.location.href = '/';
+        setSuccess('Logout successful.');
+      }, 3000
+    
+    
+    );
+
+      
+    } catch (error) {
+      console.error('Logout failed:', error);
+      setLoading(false);
+    }
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const handleNavigate = (item)=>{
-    if(item.title==="Profile"){
+  const handleProfile = async () =>{
+    window.location.href = `/profile/${auth.user?.id}`;
+  }
+  const handleNavigate = (item) => {
+    if (item.title === "Profile") {
       navigate(`/profile/${auth.user?.id}`)
     }
-    if(item.title==="Home"){
+    if (item.title === "Home") {
       navigate(`/`)
     }
 
   }
 
   return (
-    <Card className='card h-screen flex flex-col justify-between py-4 ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }}>
+    <Card className='card flex flex-col justify-between py-4 min-h-lvh	' style={{ backgroundColor: "#211b44", borderRadius: "0px" }}>
       <div className='space-y-8 pl-4 pr-4'>
         <div className=''>
           <img className='size-1/5' src="https://r.resimlink.com/gqN9f.png" alt="" />
@@ -37,7 +98,7 @@ const Sidebar = () => {
 
         <div className='space-y-8'>
           {navigationMenu.map((item) => (
-            <div onClick={()=>handleNavigate(item) }  key={item.title} className='cursor-pointer flex space-x-3 items-center  text-gray-50 font-kanit hover:bg-gray-500  rounded-full p-0.5'>
+            <div onClick={() => handleNavigate(item)} key={item.title} className='cursor-pointer flex space-x-3 items-center  text-gray-50 font-kanit hover:bg-gray-500  rounded-full p-0.5'>
               {item.icon}
               <p className='text-xl '>{item.title}</p>
             </div>
@@ -53,18 +114,27 @@ const Sidebar = () => {
         </div>
         <div className='pl-5 flex items-center justify-between pt-5'>
           <div className='flex items-center space-x-3'>
+
+          <Avatar
+              src={auth?.user.image || ''}
+              sx={{ 
+                bgcolor: auth?.user.image 
+                ? "transparent" 
+                : auth?.user.randomProfileColorCode }} aria-label="recipe">
+              {!auth?.user.image && (
+                <span className='text-xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+              )}
+            </Avatar>
+
             
-          <Avatar sx={{ bgcolor: auth?.user.randomProfileColorCode }} aria-label="recipe">
-            <span >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
-          </Avatar>
 
             <div>
-              <p className='font-kanit text-gray-50'>{auth.user?.firstName + " " + auth.user?.lastName }</p>
+              <p className='font-kanit text-gray-50'>{auth.user?.firstName + " " + auth.user?.lastName}</p>
               <p className='opacity-70 font-kanit-regular text-gray-200'>
-                
-              @{auth.user?.nickname || auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}
-                
-                </p>
+
+                @{auth.user?.nickname || auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}
+
+              </p>
             </div>
           </div>
 
@@ -79,6 +149,8 @@ const Sidebar = () => {
 
           </Button>
           <Menu
+
+
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -86,13 +158,64 @@ const Sidebar = () => {
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
+
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                backgroundColor: '#7169eb',
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                }}}}
+
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={handleProfile}>
+                <ListItemIcon>
+                  <MdAccountCircle color='white' size={24} />
+                </ListItemIcon>
+                <span className='text-gray-100 font-kanit'>Profile</span>
+
+
+
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+            <ListItemIcon>
+            <MdOutlineLogout color='white' size={20}  />
+
+          </ListItemIcon>
+          <span className='text-gray-100 font-kanit'>Logout</span>
+
+            </MenuItem>
+
+      
+
           </Menu>
+
+          {success && (
+              <div className="fixed bottom-4 left-0 right-0 flex justify-center">
+                <Alert ariant="filled" severity="info" style={{ color: 'text-gray-100' }}>
+                  {success}
+                </Alert>
+              </div>
+            )}
+
+{loading && (
+        <div className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-black bg-opacity-50" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
+          <GradientCircularProgress thickness={6} />
+        </div>
+      )}
+
         </div>
       </div>
     </Card>
+
+
+
   );
 };
 

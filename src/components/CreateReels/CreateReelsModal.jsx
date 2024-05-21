@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Avatar, CircularProgress, Divider, IconButton, TextField } from '@mui/material';
-import { IoIosClose } from "react-icons/io";
-import { IoImageOutline, IoVideocamOutline } from 'react-icons/io5';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { uploadToCloudinary } from '../../utils/uploadToCloudniry';
-import { createCommentAction, createPostAction } from '../../Redux/Post/post.action';
-import { getLastFiveUsersAction } from '../../Redux/Auth/auth.action';
+import { Avatar, Box, Button, CircularProgress, Divider, IconButton, Modal } from '@mui/material';
+import { IoIosClose } from 'react-icons/io';
+import { IoVideocamOutline } from 'react-icons/io5';
+import { createReelsAction } from '../../Redux/Reels/reels.action';
 
 const style = {
     position: 'absolute',
@@ -20,13 +16,17 @@ const style = {
     bgcolor: '#211b44',
     border: '1px solid #000',
     boxShadow: 24,
-
     overflowY: 'auto', // Scroll yapılabilirlik ekledik
-    maxHeight: '80vh'
+    maxHeight: '80vh',
+
 };
 
 
-const CreatePostModal = ({ handleClose, open }) => {
+
+
+
+const CreateReelsModal = ({ handleClose, open }) => {
+
     const dispatch = useDispatch();
     const { auth } = useSelector(store => store);
     const [loading, setLoading] = React.useState(false);
@@ -34,27 +34,25 @@ const CreatePostModal = ({ handleClose, open }) => {
 
     const handleSubmit = async (values) => {
         setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // 3 saniye bekletme
-        dispatch(createPostAction(values))
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        dispatch(createReelsAction(values))
         setLoading(false);
         handleClose();
         console.log("formik values", values);
     }
     const formik = useFormik({
         initialValues: {
-            caption: "",
-            image: "",
+            title: "",
             video: "",
         },
         onSubmit: handleSubmit,
     });
 
 
-;
-
 
     const [selectedImage, setSelectedImage] = useState();
     const [selectedVideo, setSelectedVideo] = useState();
+
     const handleSelectImage = async (event) => {
 
         setLoading(true);
@@ -75,9 +73,8 @@ const CreatePostModal = ({ handleClose, open }) => {
 
     }
 
-    const handleRemoveVideoAndImageClose = () => {
+    const handleRemoveVideoAndClose = () => {
         setSelectedVideo(null); // Seçilen videoyu sıfırla
-        setSelectedImage(null);
         handleClose(); // Modalı kapat
     };
 
@@ -94,7 +91,7 @@ const CreatePostModal = ({ handleClose, open }) => {
 
                         <div className='flex items-center justify-between my-2'>
                             <div className='flex items-center space-x-2 -ml-4 -mt-5 '>
-                                <IconButton onClick={handleRemoveVideoAndImageClose}  >
+                                <IconButton onClick={handleRemoveVideoAndClose}  >
                                     <IoIosClose color='white' size={32} />
                                 </IconButton >
                             </div>
@@ -119,10 +116,10 @@ const CreatePostModal = ({ handleClose, open }) => {
                             <textarea
                                 type='text'
                                 onChange={(e) => {
-                                    formik.setFieldValue('caption', e.target.value);
+                                    formik.setFieldValue('title', e.target.value);
                                 }}
                                 value={formik.values.caption}
-                                placeholder="What's going on?"
+                                placeholder="Video Title"
                                 rows="4"
                                 style={{ resize: 'none' }} // Alt çentiği kaldır
                                 class="
@@ -141,34 +138,21 @@ const CreatePostModal = ({ handleClose, open }) => {
 
 
 
+                       
 
 
                         </div>
+                        {selectedVideo && <video class="w-full " 
+                         posterResizeMode="cover"
+                         resizeMode="cover"
 
-                        {selectedImage && <div >
-                            <img 
-                                     
-           
-                                src={selectedImage} alt='' 
-                                
-                                className="h-96 rounded-lg w-full object-cover object-center"
-                                
-                                />
-                        </div>
-                        }
+                         
+                        controls >
+                                <source src={selectedVideo}    type="video/mp4" />
+                              
 
-                        
-                        {selectedVideo && <video class="w-full rounded-lg "
-                            posterResizeMode="cover"
-                            resizeMode="cover"
-
-
-                            controls >
-                            <source src={selectedVideo} type="video/mp4" />
-
-
-                        </video>}
-
+                            </video> }
+                            
                         <div className='mt-4 ml-2 mr-2'>
                             <Divider style={{ backgroundColor: '#d7dae0' }} />
                         </div>
@@ -177,12 +161,12 @@ const CreatePostModal = ({ handleClose, open }) => {
                         <div className='flex justify-start space-x-3 mt-3 '>
 
 
-                            <div className='flex items-center'>
+                            {/* <div className='flex items-center'>
 
                                 <input
                                     type='file'
                                     accept='image/*'
-                                    onChange={handleSelectImage}
+                                    onChange={handleSelectVideo}
                                     style={{ display: "none" }}
                                     id='image-input'
                                 />
@@ -196,7 +180,7 @@ const CreatePostModal = ({ handleClose, open }) => {
                                 </label>
                                 <span className='font-kanit-regular text-gray-300' >Media</span>
 
-                            </div>
+                            </div> */}
 
 
                             <div className='flex items-center  '>
@@ -234,7 +218,7 @@ const CreatePostModal = ({ handleClose, open }) => {
                                     {loading ? (
                                         <CircularProgress size={24} color="inherit" />
                                     ) : (
-                                        "Post"
+                                        "Reels"
                                     )}
 
                                 </Button>
@@ -280,6 +264,11 @@ const CreatePostModal = ({ handleClose, open }) => {
 
                         </div> */}
 
+                        {/* {selectedVideo && <div>
+                            <img src={selectedVideo} alt='' className='h-[10rem]' />
+                        </div>
+                        } */}
+
 
 
 
@@ -295,4 +284,4 @@ const CreatePostModal = ({ handleClose, open }) => {
     )
 }
 
-export default CreatePostModal
+export default CreateReelsModal

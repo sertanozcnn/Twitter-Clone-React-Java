@@ -1,25 +1,23 @@
-import { Avatar, Button, CardHeader } from '@mui/material'
-import { red } from '@mui/material/colors'
-import React from 'react'
-const PopularUserCard = ({ user ,isFollowingControl,handleAction}) => {
+    import { Avatar, Button, CardHeader, Typography } from '@mui/material'
+    import { red } from '@mui/material/colors'
+    import React from 'react'
 
+    const UserCardFollowing = ({ user ,isFollowingControl,handleAction}) => {
+        const [isFollowing, setIsFollowing] = React.useState(true);
 
-  const [isFollowing, setIsFollowing] = React.useState(true);
+        const handleMouseOver = () => {
+            setIsFollowing(false);
+        };
 
-  const handleMouseOver = () => {
-      setIsFollowing(false);
-  };
+        const handleMouseOut = () => {
+            setIsFollowing(true);
+        };
 
-  const handleMouseOut = () => {
-      setIsFollowing(true);
-  };
+        
 
-
-  
-
-  return (
-    <div className='flex- ' >
-     <CardHeader
+        return (
+            <div>
+                <CardHeader
                     className=''
                     avatar={
                         <Avatar
@@ -67,9 +65,10 @@ const PopularUserCard = ({ user ,isFollowingControl,handleAction}) => {
 
                 />
 
-      
-    </div>
-  )
-}
 
-export default PopularUserCard
+
+            </div>
+        )
+    }
+
+    export default UserCardFollowing

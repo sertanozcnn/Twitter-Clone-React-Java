@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, Tab, Tabs } from '@mui/material';
+import { Avatar, Box, Button, Card, Divider, Tab, Tabs } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PostCard from '../../components/Post/PostCard';
@@ -6,6 +6,8 @@ import UserReelCard from '../../components/Reels/UserReelCard';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileModal from '../Profile/ProfileModal';
 import { getProfileAction, userFollowersCount, userFollowingsCount, userGetPostCount } from '../../Redux/Auth/auth.action';
+import { getSavedPostAction, getUsersPostAction } from '../../Redux/Post/post.action';
+import { getAllReelsUsers } from '../../Redux/Reels/reels.action';
 
 const tabs = [
   { value: "post", name: "Post", },
@@ -15,13 +17,15 @@ const tabs = [
 ]
 
 const posts = [1, 1, 1, 1];
-const reels = [1, 1, 1, 1];
+const reels = [1, 1, 1, 1,1,1];
 const savedPost = [1, 1, 1];
 
-const Profile = () => {
+const Profile = ({ lg }) => {
+  const gridLg = lg || 6; // Eğer lg prop'u tanımlı değilse, varsayılan olarak 6 kullan
+
   const { id } = useParams();
 
-  const { auth } = useSelector(store => store);
+  const { auth, post,reels } = useSelector(store => store);
   const [open, setOpen] = useState(false);
   const handleOpenProfileModal = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,28 +45,36 @@ const Profile = () => {
     dispatch(userGetPostCount(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(userFollowingsCount(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(userFollowersCount(localStorage.getItem('jwt'), auth.user?.id));
+    dispatch(getUsersPostAction(localStorage.getItem('jwt'), auth.user?.id));
+    dispatch(getSavedPostAction(localStorage.getItem('jwt'), auth.user?.id));
+    dispatch(getAllReelsUsers(localStorage.getItem('jwt'), auth.user?.id));
   }, []);
 
   console.log("auth", auth);
 
-
+  const userPosts = post.posts;
+  const savedPosts = post.savedPosts;
   const postCount = auth.postCount;
   const followingsCount = auth.followingsCount;
   const followersCount = auth.followersCount;
+  const userReels = reels.allReels;
+
+  //const userListLast = reels.viewReels || [];
 
 
 
-
-
+  console.log("postCount", postCount);
+  console.log("savedPosts -----", savedPosts);
+  console.log("userreels -----", userReels);
   return (
-    <Card className=' w-[80%] ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }} >
-      <div className='rounded-md'>
+    <Card className=' w-4/5    md:max-xl:mt-10 min-h-lvh ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }} >
+      <div className='rounded-md  '>
         <div className='p-2 pl-5'>
 
 
 
           <div className='flex items-start'  >
-            <h1 className='font-kanit  text-gray-50 text-2xl font-bold' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
+            <h1 className='font-kanit  text-gray-50 text-2xl font-bold  ' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
           </div>
 
           <div>
@@ -77,7 +89,7 @@ const Profile = () => {
 
         <div className='h-[15rem]' >
           <img
-            className='w-full h-full rounded-t-md'
+            className='w-full h-full rounded-t-md '
             src='https://images.pexels.com/photos/592077/pexels-photo-592077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
 
         </div>
@@ -85,10 +97,15 @@ const Profile = () => {
 
           <Avatar
             withBorder={true}
-            sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.randomProfileColorCode }}
-            className='transform -translate-y-24  rounded-full ring-2 ring-gray-700 dark:ring-gray-800 '
-            src='' >
-            <span className='text-5xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+            sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.image ? "transparent" : auth?.user.randomProfileColorCode }}
+            className='transform -translate-y-24  rounded-full ring-4 ring-gray-700 dark:ring-gray-800 '
+            src={auth?.user.image || ''}
+
+          >
+            {!auth?.user.image && (
+              <span className='text-5xl'>{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+            )}
+
 
           </Avatar>
 
@@ -111,7 +128,7 @@ const Profile = () => {
           )}
         </div>
 
-        <div className='px-5'>
+        <div className='px-5 '>
 
           <div>
             <h1 className='font-kanit  text-gray-50 text-xl' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
@@ -143,7 +160,7 @@ const Profile = () => {
 
             <a href='/followers' className='hover:underline' style={{ color: 'white' }} >
               <span className='text-gray-100 font-kanit' >
-                <span className='font-bold'>{followersCount}</span>
+                <span className='font-bold '>{followersCount}</span>
                 <span> Followers</span>
               </span>
             </a>
@@ -154,7 +171,7 @@ const Profile = () => {
 
         </div>
 
-        <section >
+        <section  >
           <Box sx={{ width: '100%', borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}
@@ -162,7 +179,7 @@ const Profile = () => {
               textColor="gray-100"
               indicatorColor="secondary"
               aria-label="secondary tabs example"
-              className='text-gray-100'
+              className='text-gray-100 '
               TabIndicatorProps={{ style: { background: 'white' } }}
 
             >
@@ -172,30 +189,52 @@ const Profile = () => {
             </Tabs>
           </Box>
 
-          <div className='flex justify-center'>
+          <div className='flex justify-center  '>
 
             {value === "post" ? (
-              <div className='flex flex-wrap gap-2 justify-center mt-4'>
+              <div className='flex flex-wrap gap-2 justify-center  ' style={{ backgroundColor: "#44359e" }}>
 
-                {posts.map((item) => (
 
-                  <div className=' border-slate-500 rounded-md' >
-
-                    <PostCard />
-
+                {userPosts.map((post) => (
+                  <div className=' rounded-md  py-5 px-2' key={post.id}>
+                    <PostCard item={post} />
                   </div>
-                ))}
+                )
+                )}
+
+
 
               </div>
-            ) : value === "reels" ?
-              <div className='flex flex-wrap gap-2 justify-center mt-4 '>
 
-                {reels.map((item) => <UserReelCard />)}
+
+
+
+            ) : value === "reels" ?
+              <div className='flex flex-wrap gap-2 justify-center' style={{ backgroundColor: "#44359e" }} >
+
+                {userReels.map((item) =>
+
+
+                (
+
+                  <div className=' rounded-lg px-2 ' >
+                    <UserReelCard item={item} />
+                  </div>
+                )
+                )
+
+
+                }
 
               </div> : value === "saved" ?
-                <div className='flex flex-wrap gap-2 justify-center mt-4 '>
+                <div className='flex flex-wrap gap-2 justify-center  ' style={{ backgroundColor: "#44359e" }}>
 
-                  {savedPost.map((item) => <PostCard />)}
+                  {savedPosts.map((post) => (
+                    <div className=' rounded-md  py-5 px-2' key={post.id}>
+                      <PostCard item={post} />
+                    </div>
+                  )
+                  )}
 
                 </div> : (
 
@@ -205,12 +244,17 @@ const Profile = () => {
 
 
           </div>
+
         </section>
       </div>
+
+
 
       <section>
         <ProfileModal open={open} handleClose={handleClose} initialValues={auth.user} />
       </section>
+
+
 
 
     </Card>

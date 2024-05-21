@@ -9,9 +9,13 @@ import { MdOutlineArticle } from "react-icons/md";
 import CreatePostModal from '../CreatePost/CreatePostModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPostAction } from '../../Redux/Post/post.action';
+import CreateReelsModal from '../CreateReels/CreateReelsModal';
+import { getLastFiveUsersAction } from '../../Redux/Auth/auth.action';
+import ViewReelsModal from '../CreateReels/ViewReelsModal';
+import { getLastReelsByUserIdAction } from '../../Redux/Reels/reels.action';
 
 
-const story = [11, 1, 1, 1, 1, 1];
+const story = [1, 1, 1, 1, 1, 1];
 const posts = [1, 1, 1, 1, 1];
 
 const MiddlePart = () => {
@@ -19,41 +23,106 @@ const MiddlePart = () => {
   const dispatch = useDispatch();
   const { post } = useSelector(store => store);
 
+
+
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
+  const [openCreateReelsModal, setOpenCreateReelsModal] = useState(false);
+  const [openViewReelsModal, setOpenViewReelsModal] = useState(false);
+
   const { auth } = useSelector(store => store);
-  console.log("Post Store",post);
+  console.log("Post Store", post);
   const handleCloseCreatePostModal = () => setOpenCreatePostModal(false);
+  const handleCloseCreateReelsModal = () => setOpenCreateReelsModal(false);
+  const handleCloseViewReelsModal = () => setOpenViewReelsModal(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   const handleOpenCreatePostModal = () => {
     setOpenCreatePostModal(true);
     console.log("Open Create Post Modal", openCreatePostModal);
   }
 
+  const handleOpenCreateReelsModal = () => {
+    setOpenCreateReelsModal(true);
+    console.log("Open Create Reels Modal", openCreateReelsModal);
+  }
+
+
+
+  const handleOpenViewReelsModal = async (userId) => {
+    setSelectedUserId(userId);
+    console.log("Open View Reels Modal", openViewReelsModal);
+
+    setOpenViewReelsModal(true);
+  }
+
+
   useEffect(() => {
     dispatch(getAllPostAction())
-  }, [])
+    dispatch(getLastFiveUsersAction(localStorage.getItem('jwt')));
+  }, [post.newComment])
+
+
+  const userLastFive = auth.lastFiveUsers;
+
+  console.log("user lastFive", userLastFive)
+
+
+
+  //   useEffect(() => {
+  //     if (auth.user?.id) {
+  //         dispatch(getLastFiveUsersAction(localStorage.getItem('jwt')));
+
+  //     }
+  // }, [auth.user, dispatch]);
+
 
   return (
-    <div className='px-20'>
-      <section className='flex items-center p-5 rounded-b-md'>
+    <div className=''>
+
+      <section className='flex items-center p-5 rounded-b-md  md:max-xl:mt-10'>
         <div className='flex flex-col items-center mr-2 cursor-pointer'>
           <Avatar sx={{ width: "3.5rem", height: "3.5rem", backgroundColor: "#44359e" }} >
 
-            <IoIosAdd size={30} />
+
+
+            <IconButton onClick={handleOpenCreateReelsModal}>
+              <IoIosAdd size={30} color='white' />
+            </IconButton>
           </Avatar>
           <p className='font-kanit-regular text-gray-200' >New</p>
         </div>
 
-        {story.map((item) => <StoryCircle />)}
+
+
+        {userLastFive && userLastFive.length > 0 && userLastFive.map((user) =>
+
+          <StoryCircle
+          onClick={() => handleOpenViewReelsModal(user.id)} // userId değerini iletiyoruz
+          key={user.id}
+          user={user}
+
+          />
+
+
+        )}
+
+
+
 
       </section>
 
-      <section ck>
+      <section>
         <Card className='p-4 mt-5 ' style={{ backgroundColor: "#211b44" }}>
           <div className='flex justify-between'>
 
-            <Avatar sx={{ bgcolor: auth?.user.randomProfileColorCode }} aria-label="recipe">
-              <span >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+
+
+            <Avatar
+              src={auth?.user.image || ''}
+              sx={{ bgcolor: auth?.user.image ? "transparent" : auth?.user.randomProfileColorCode }} aria-label="recipe">
+              {!auth?.user.image && (
+                <span className='text-xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
+              )}
             </Avatar>
 
 
@@ -110,8 +179,10 @@ const MiddlePart = () => {
 
 
         </Card>
-        <div className='mt-5 space-y-5 mb-4' >
-          {post.posts.map((item) => <PostCard item={item}/>)}
+        <div className='mt-5 space-y-5 mb-4 ' >
+          {post.posts.map((item) => <PostCard item={item} />
+
+          )}
 
 
         </div>
@@ -122,6 +193,21 @@ const MiddlePart = () => {
       <div>
         <CreatePostModal handleClose={handleCloseCreatePostModal} open={openCreatePostModal} />
       </div>
+
+
+      <div>
+        <CreateReelsModal handleClose={handleCloseCreateReelsModal} open={openCreateReelsModal} />
+      </div>
+
+      <div>
+        <ViewReelsModal
+          userId={selectedUserId}
+          handleClose={handleCloseViewReelsModal}
+          open={openViewReelsModal} />
+      </div>
+
+
+
 
 
 
