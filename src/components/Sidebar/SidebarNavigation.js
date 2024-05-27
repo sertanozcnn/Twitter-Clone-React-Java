@@ -1,5 +1,4 @@
 import { MdOutlineExplore } from "react-icons/md";
-import { MdAddCircleOutline } from "react-icons/md";
 import { MdOutlineNotificationsNone } from "react-icons/md";
 import { RiFileListLine } from "react-icons/ri";
 import { RiGroupLine } from "react-icons/ri";
@@ -26,11 +25,7 @@ export const navigationMenu = [
         icon: <MdOutlineExplore   size={28} />,
         path: "/reels",
     },
-    {
-        title: "Create Reels",
-        icon: <MdAddCircleOutline   size={26}/>,
-        path: "/create-reels",
-    },
+  
     {
         title: "Notifications",
         icon: <MdOutlineNotificationsNone  size={28} />,

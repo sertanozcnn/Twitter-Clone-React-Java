@@ -1,17 +1,14 @@
 // HomePage.js
 
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { Grid, Hidden } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { useEffect } from 'react';
 import MiddlePart from '../../components/MiddlePart/MiddlePart';
-import Reels from '../../components/Reels/Reels';
-import CreateReelsForm from '../../components/Reels/CreateReelsForm';
 import Profile from '../Profile/Profile';
 import HomeRight from '../../components/HomeRight/HomeRight';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getProfileAction } from '../../Redux/Auth/auth.action';
-import { store } from '../../Redux/store';
 import Following from '../../components/Following/Following';
 import Followers from '../../components/Following/Followers';
 
@@ -23,15 +20,15 @@ const HomePage = () => {
 
   const jwt = localStorage.getItem('jwt');
 
-  const { auth } = useSelector(store => store);
 
-  //console.log("auth", auth);
 
 
   useEffect(() => {
+    document.title = 'Home';
+
     dispatch(getProfileAction(jwt))
 
-  }, [])
+  }, [dispatch, jwt]);
 
 
   return (
@@ -49,8 +46,6 @@ const HomePage = () => {
         <Grid lg={location.pathname === "/" ? 6 : 9} xs={12} item className='flex justify-center ' >
           <Routes>
             <Route path="/" element={<MiddlePart />} />
-            <Route path="/reels" element={<Reels />} />
-            <Route path="/create-reels" element={<CreateReelsForm />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/following" element={<Following />} />
             <Route path="/followers" element={<Followers />} />

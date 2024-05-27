@@ -30,6 +30,7 @@ const CreateReelsModal = ({ handleClose, open }) => {
     const dispatch = useDispatch();
     const { auth } = useSelector(store => store);
     const [loading, setLoading] = React.useState(false);
+    const [selectedVideo, setSelectedVideo] = useState();
 
 
     const handleSubmit = async (values) => {
@@ -50,18 +51,6 @@ const CreateReelsModal = ({ handleClose, open }) => {
 
 
 
-    const [selectedImage, setSelectedImage] = useState();
-    const [selectedVideo, setSelectedVideo] = useState();
-
-    const handleSelectImage = async (event) => {
-
-        setLoading(true);
-        const imageUrl = await uploadToCloudinary(event.target.files[0], "image");
-        setSelectedImage(imageUrl);
-        setLoading(false);
-        formik.setFieldValue("image", imageUrl);
-
-    }
     const handleSelectVideo = async (event) => {
 
         setLoading(true);
@@ -95,13 +84,9 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                     <IoIosClose color='white' size={32} />
                                 </IconButton >
                             </div>
-
                         </div>
 
-
                         <div className='space-y-2 block w-full flex justify-between'>
-
-
                             <Avatar
                                 src={auth?.user.image || ''}
                                 sx={{ bgcolor: auth?.user.image ? "transparent" : auth?.user.randomProfileColorCode }} aria-label="recipe">
@@ -109,9 +94,6 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                     <span className='text-xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
                                 )}
                             </Avatar>
-
-
-
 
                             <textarea
                                 type='text'
@@ -123,65 +105,42 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                 rows="4"
                                 style={{ resize: 'none' }} // Alt çentiği kaldır
                                 class="
-                                        mr-4
-                                        text-lg
-                                        peer 
-                                        h-full w-[90%]
-                                        text-gray-200
-                                        bg-transparent  
-                                        px-5 
-                                        pb-1.5 font-normal 
-                                        outline outline-0 
-                                        transition-all placeholder-shown:border-blue-gray-200 
-                                        focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 bg-purple" ></textarea>
+                                mr-4
+                                text-lg
+                                peer 
+                                h-full w-[90%]
+                                text-gray-200
+                                bg-transparent  
+                                px-5 
+                                pb-1.5 font-normal 
+                                outline outline-0 
+                                transition-all placeholder-shown:border-blue-gray-200 
+                                focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 bg-purple" >
+
+
+                            </textarea>
 
 
 
 
-                       
+
 
 
                         </div>
-                        {selectedVideo && <video class="w-full " 
-                         posterResizeMode="cover"
-                         resizeMode="cover"
+                        {selectedVideo && <video class="w-full "
+                            posterResizeMode="cover"
+                            resizeMode="cover"
+                            controls >
+                            <source src={selectedVideo} type="video/mp4" />
+                        </video>
+                        }
 
-                         
-                        controls >
-                                <source src={selectedVideo}    type="video/mp4" />
-                              
-
-                            </video> }
-                            
                         <div className='mt-4 ml-2 mr-2'>
                             <Divider style={{ backgroundColor: '#d7dae0' }} />
                         </div>
 
 
                         <div className='flex justify-start space-x-3 mt-3 '>
-
-
-                            {/* <div className='flex items-center'>
-
-                                <input
-                                    type='file'
-                                    accept='image/*'
-                                    onChange={handleSelectVideo}
-                                    style={{ display: "none" }}
-                                    id='image-input'
-                                />
-
-                                <label htmlFor='image-input'>
-                                    <IconButton color='primary'
-                                        component="span"
-                                    >
-                                        <IoImageOutline style={{ color: '#b3bbc6' }} />
-                                    </IconButton>
-                                </label>
-                                <span className='font-kanit-regular text-gray-300' >Media</span>
-
-                            </div> */}
-
 
                             <div className='flex items-center  '>
 
@@ -202,14 +161,14 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                     </IconButton>
                                 </label>
                                 <span className='font-kanit-regular text-gray-300'>Video</span>
-                            </div>
 
+                            </div>
 
 
                             <div className='flex items-center' style={{ marginLeft: 'auto' }}>
                                 <Button
                                     class="
-                                        
+                           
                                         bg-gray-800 hover:bg-gray-900 focus:outline-none 
                                         font-kanit rounded-full text-sm px-5 
                                         py-2.5  dark:bg-gray-100 dark:hover:bg-gray-600 
@@ -220,64 +179,11 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                     ) : (
                                         "Reels"
                                     )}
-
                                 </Button>
-
                             </div>
-
-
                         </div>
-
-
-
-                        {/* <div className='flex space-x-5 items-center mt-5' >
-                            <div>
-                                <input type='file' accept='image/*' onChange={handleSelectImage}
-                                    style={{ display: "none" }}
-                                    id='image-input'
-                                />
-                                <label htmlFor='image-input'>
-                                    <IconButton color='primary' >
-                                        <IoImageOutline style={{ color: '#b3bbc6' }} />
-                                    </IconButton>
-                                </label>
-                                <span className='font-kanit-regular text-gray-300' >Media</span>
-
-                            </div>
-
-                            <div>
-                                <input
-                                    type='file'
-                                    accept='video/*'
-                                    onChange={handleSelectVideo}
-                                    style={{ display: "none" }}
-                                    id='video-input'
-                                />
-                                <label htmlFor='video-input'>
-                                    <IconButton color='primary' >
-                                        <IoVideocamOutline style={{ color: '#b3bbc6' }} />
-                                    </IconButton>
-                                </label>
-                                <span className='font-kanit-regular text-gray-300' >Video</span>
-
-                            </div>
-
-                        </div> */}
-
-                        {/* {selectedVideo && <div>
-                            <img src={selectedVideo} alt='' className='h-[10rem]' />
-                        </div>
-                        } */}
-
-
-
-
-
-
 
                     </form>
-
-
                 </Box>
             </Modal>
         </div>

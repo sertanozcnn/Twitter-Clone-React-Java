@@ -1,5 +1,4 @@
-import { Avatar, Box, Button, Card, CardHeader, Divider, Tab, Tabs } from '@mui/material'
-import { red } from '@mui/material/colors';
+import {  Box, Card,  Divider, Tab, Tabs } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import UserCardFollowing from './UserCardFollowing';
@@ -32,14 +31,19 @@ const Following = () => {
             dispatch(getFollowersDetails(localStorage.getItem('jwt'), auth.user?.id));
 
         }
-    }, [auth.user, dispatch]);
+    }, [auth.user?.id, dispatch]);
 
     const userPosts = auth.followingDetails;
     const userGetFollowers = auth.followersDetails;
 
-    const isFollowingControl = false;
 
     useEffect(() => {
+        const tabs = [
+            { value: "following", name: "Following", },
+            { value: "followers", name: "Followers", },
+    
+        ]
+    
         const path = window.location.pathname;
         const tab = tabs.find(item => `/${item.value}` === path);
         if (tab) {
@@ -89,7 +93,17 @@ const Following = () => {
                         indicatorColor="secondary"
                         aria-label="secondary tabs example"
                         className='text-gray-100 '
-                        TabIndicatorProps={{ style: { background: '#1d9bf0', height: '0.25rem', borderRadius: '4rem', marginLeft: '0.375rem', marginRight: '0.375rem' } }}
+                        
+                        TabIndicatorProps=
+                        {{
+                            style: {
+                                background: '#1d9bf0',
+                                height: '0.25rem',
+                                borderRadius: '4rem',
+                                marginLeft: '0.375rem',
+                                marginRight: '0.375rem'
+                            }
+                        }}
 
                     >
                         {tabs.map((item) => <Tab

@@ -1,17 +1,12 @@
 import { Alert, CircularProgress, TextField } from '@mui/material';
-import { Formik, Form, Field, ErrorMessage, validateYupSchema } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import * as Yup from "yup";
 import { loginUserAction } from '../../Redux/Auth/auth.action';
 
 const initialValues = { email: "", password: "" }
 
-// const validationSchema = {
-//   email: Yup.string().email("Invalid email").required("Email is required"),
-//   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-// };
 
 
 function GradientCircularProgress() {
@@ -43,10 +38,11 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = 'Login';
     if (success) {
       const timer = setTimeout(() => {
         setSucess('');
-      }, 4000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [success]);
@@ -57,11 +53,12 @@ const Login = () => {
     setError('');
     try {
       await dispatch(loginUserAction({ data: values }));
+      
       setTimeout(() => {
         setLoading(false);
         window.location.href = '/';
         setSucess('Login successful.')
-      }, 4000
+      }, 3000
     
     
     );
@@ -120,18 +117,80 @@ const Login = () => {
 
 
           <button type="submit"
-            className="w-full text-white bg-blue-800 
-          hover:bg-blue-700  font-kanit 
-           rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Login</button>
+                     className="
+                     w-full 
+                     font-kanit 
+                     rounded-lg 
+                     text-sm 
+                     px-5 
+                     py-3 
+                     text-center 
+                     text-gray-100
+                     justify-center 
+                     relative
+                     overflow-hidden 
+                     bg-blue-800 
+                     
+                     relative
+                     dark:hover:bg-blue-700 
+                     dark:hover:border-gray-600
+         
+                           
+                     transition-all 
+                     duration-300
+                     before:absolute 
+                     before:inset-0 
+                     before:border-0 
+                     before:border-white
+                    before:duration-100 
+                    before:ease-linear 
+                    
+                    hover:shadow-blue-600 
+                     "
+          
+                    >
+                    <span className="relative z-10">Login</span>
+          
+                    
+                    </button>
 
           <button type="submit"
-            className="w-full text-white 
-          bg-white border border-gray-300  font-kanit  
-          rounded-lg text-sm px-5 py-3 text-center 
-          dark: hover:bg-blue-700 dark:hover:border-gray-600" style={{ color: 'white' }}>Forgot Password ?</button>
+            className="w-full 
+            text-white 
+            font-kanit  
+            bg-white border 
+            border-gray-300  
+            rounded-lg 
+            text-sm 
+            px-5 
+            py-3 
+            text-center 
+            relative
+            dark:hover:bg-blue-700 
+            dark:hover:border-gray-600
 
-          <p class="text-sm font-light text-gray-100 font-kanit justify-center">
-            Don’t have an account yet? <a href="/register" class="font-medium text-blue-200 hover:underline">Sign up</a>
+                  
+            transition-all 
+            duration-300
+            before:absolute 
+            before:inset-0 
+            before:border-0 
+            before:border-white
+           before:duration-100 
+           before:ease-linear 
+           hover:text-blue-800 
+           hover:shadow-blue-600 
+          
+          " style={{ color: 'white' }}
+          
+          >
+            
+            Forgot Password ?
+            
+            </button>
+
+          <p className="text-sm font-light text-gray-100 font-kanit justify-center">
+            Don’t have an account yet? <a href="/register" className="font-medium text-blue-200 hover:underline">Sign up</a>
           </p>
 
         </Form>

@@ -1,31 +1,26 @@
-import { Avatar, Box, Button, Card, Divider, Tab, Tabs } from '@mui/material';
+import { Avatar, Box, Button, Card, Tab, Tabs } from '@mui/material';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import PostCard from '../../components/Post/PostCard';
 import UserReelCard from '../../components/Reels/UserReelCard';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileModal from '../Profile/ProfileModal';
 import { getProfileAction, userFollowersCount, userFollowingsCount, userGetPostCount } from '../../Redux/Auth/auth.action';
-import { getSavedPostAction, getUsersPostAction } from '../../Redux/Post/post.action';
+import { getLikedPostAction, getSavedPostAction, getUsersPostAction } from '../../Redux/Post/post.action';
 import { getAllReelsUsers } from '../../Redux/Reels/reels.action';
 
 const tabs = [
   { value: "post", name: "Post", },
   { value: "reels", name: "Reels", },
   { value: "saved", name: "Saved", },
-  { value: "repost", name: "Repost", },
+  { value: "liked", name: "Liked", },
 ]
 
-const posts = [1, 1, 1, 1];
-const reels = [1, 1, 1, 1,1,1];
-const savedPost = [1, 1, 1];
 
-const Profile = ({ lg }) => {
-  const gridLg = lg || 6; // Eğer lg prop'u tanımlı değilse, varsayılan olarak 6 kullan
 
-  const { id } = useParams();
+const Profile = () => {
 
-  const { auth, post,reels } = useSelector(store => store);
+
+  const { auth, post, reels } = useSelector(store => store);
   const [open, setOpen] = useState(false);
   const handleOpenProfileModal = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,14 +36,16 @@ const Profile = ({ lg }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = 'Profile';
     dispatch(getProfileAction(localStorage.getItem('jwt')));
     dispatch(userGetPostCount(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(userFollowingsCount(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(userFollowersCount(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(getUsersPostAction(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(getSavedPostAction(localStorage.getItem('jwt'), auth.user?.id));
+    dispatch(getLikedPostAction(localStorage.getItem('jwt'), auth.user?.id));
     dispatch(getAllReelsUsers(localStorage.getItem('jwt'), auth.user?.id));
-  }, []);
+  }, [dispatch, auth.user?.id]);
 
   console.log("auth", auth);
 
@@ -58,6 +55,7 @@ const Profile = ({ lg }) => {
   const followingsCount = auth.followingsCount;
   const followersCount = auth.followersCount;
   const userReels = reels.allReels;
+  const likedPosts = post.likedPosts;
 
   //const userListLast = reels.viewReels || [];
 
@@ -66,8 +64,11 @@ const Profile = ({ lg }) => {
   console.log("postCount", postCount);
   console.log("savedPosts -----", savedPosts);
   console.log("userreels -----", userReels);
+  console.log("likedPosts ----", likedPosts);
+
+
   return (
-    <Card className=' w-4/5    md:max-xl:mt-10 min-h-lvh ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }} >
+    <Card className=' w-4/5    md:max-xl:mt-10 min-h-lvh   ' style={{ backgroundColor: "#211b44", borderRadius: "0px" }} >
       <div className='rounded-md  '>
         <div className='p-2 pl-5'>
 
@@ -89,8 +90,18 @@ const Profile = ({ lg }) => {
 
         <div className='h-[15rem]' >
           <img
-            className='w-full h-full rounded-t-md '
-            src='https://images.pexels.com/photos/592077/pexels-photo-592077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
+            className='w-full h-full  object-cover object-center 
+                 transform    
+                 transition-color   
+                 duration-200 
+                 hover:border-4
+            
+            '
+            alt='User Background'
+            src={auth?.user.backgroundImage || 'https://images.pexels.com/photos/8892/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+
+
+          />
 
         </div>
         <div className='px-5 flex justify-between items-start mt-5 h-[5rem] '>
@@ -98,7 +109,14 @@ const Profile = ({ lg }) => {
           <Avatar
             withBorder={true}
             sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.image ? "transparent" : auth?.user.randomProfileColorCode }}
-            className='transform -translate-y-24  rounded-full ring-4 ring-gray-700 dark:ring-gray-800 '
+            className='
+            transform -translate-y-24  
+            rounded-full
+            ring-4 ring-gray-700 
+            dark:ring-gray-800 
+            hover:ring-gray-100
+            transition-color  transform duration-200
+            '
             src={auth?.user.image || ''}
 
           >
@@ -128,7 +146,7 @@ const Profile = ({ lg }) => {
           )}
         </div>
 
-        <div className='px-5 '>
+        <div className='px-5'>
 
           <div>
             <h1 className='font-kanit  text-gray-50 text-xl' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
@@ -172,34 +190,59 @@ const Profile = ({ lg }) => {
         </div>
 
         <section  >
-          <Box sx={{ width: '100%', borderBottom: 1, borderColor: "divider" }}>
+          <Box sx={{ width: '100%', borderBottom: 1, borderColor: "divider" }} >
             <Tabs
               value={value}
               onChange={handleChange}
               textColor="gray-100"
               indicatorColor="secondary"
               aria-label="secondary tabs example"
-              className='text-gray-100 '
-              TabIndicatorProps={{ style: { background: 'white' } }}
+              className='text-gray-100  '
+
+              TabIndicatorProps=
+
+              {{
+                style: {
+                  background: '#1d9bf0',
+                  height: '0.25rem',
+                  borderRadius: '4rem',
+                  marginLeft: '0.375rem',
+                  marginRight: '0.375rem',
+                },
+
+              }}
+
+
+
+
+
 
             >
-              {tabs.map((item) => <Tab value={item.value} label={item.name} wrapped />)}
+              {tabs.map((item) => <Tab
+                sx={{
+                  fontWeight: value === item.value ? 'bold' : 'font-kanit',
+                  color: 'white',
+                }}
+                value={item.value} label={item.name} wrapped
+
+              />)}
 
 
             </Tabs>
           </Box>
 
-          <div className='flex justify-center  '>
+          <div className='flex justify-center ' style={{ backgroundColor: "#44359e" }} >
 
             {value === "post" ? (
-              <div className='flex flex-wrap gap-2 justify-center  ' style={{ backgroundColor: "#44359e" }}>
-
-
-                {userPosts.map((post) => (
-                  <div className=' rounded-md  py-5 px-2' key={post.id}>
-                    <PostCard item={post} />
-                  </div>
-                )
+              <div className='flex flex-wrap gap-2 justify-center'>
+                {userPosts.length > 0 ? (
+                  userPosts.map((post) => (
+                    <div className='rounded-md py-5 px-2' key={post.id}>
+                      <PostCard item={post} />
+                    </div>
+                  ))
+                ) : (
+                  <p className='text-gray-100 font-kanit py-5'>Post Not Found</p>
                 )}
 
 
@@ -212,33 +255,45 @@ const Profile = ({ lg }) => {
             ) : value === "reels" ?
               <div className='flex flex-wrap gap-2 justify-center' style={{ backgroundColor: "#44359e" }} >
 
-                {userReels.map((item) =>
+                {userReels.length > 0 ? (
+                  userReels.map((item) => (
+                    <div className='rounded-lg px-2' key={item.id}>
+                      <UserReelCard item={item} />
+                    </div>
+                  ))
+                ) : (
+                  <p className='text-gray-100 font-kanit py-5'>Reels Not Found</p>
 
-
-                (
-
-                  <div className=' rounded-lg px-2 ' >
-                    <UserReelCard item={item} />
-                  </div>
-                )
-                )
-
-
-                }
+                )}
 
               </div> : value === "saved" ?
                 <div className='flex flex-wrap gap-2 justify-center  ' style={{ backgroundColor: "#44359e" }}>
 
-                  {savedPosts.map((post) => (
-                    <div className=' rounded-md  py-5 px-2' key={post.id}>
-                      <PostCard item={post} />
-                    </div>
-                  )
+                  {savedPosts.length > 0 ? (
+                    savedPosts.map((post) => (
+                      <div className='rounded-md py-5 px-2' key={post.id}>
+                        <PostCard item={post} />
+                      </div>
+                    ))
+                  ) : (
+                    <p className='text-gray-100 font-kanit py-5'>Saved Not Found</p>
                   )}
 
                 </div> : (
 
-                  <div className='mt-5 text-gray-100 font-kanit'>Repost</div>
+                  <div className='flex flex-wrap gap-2 justify-center  ' style={{ backgroundColor: "#44359e" }}>
+
+                    {likedPosts.length > 0 ? (
+                      likedPosts.map((post) => (
+                        <div className='rounded-md py-5 px-2' key={post.id}>
+                          <PostCard item={post} />
+                        </div>
+                      ))
+                    ) : (
+                      <p className='text-gray-100 font-kanit py-5'>Liked Not Found</p>
+                    )}
+
+                  </div>
                 )}
 
 

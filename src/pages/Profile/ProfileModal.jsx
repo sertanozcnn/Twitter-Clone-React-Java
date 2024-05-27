@@ -7,8 +7,7 @@ import { useFormik } from 'formik';
 import { updateProfileAction } from '../../Redux/Auth/auth.action';
 import { Avatar, CircularProgress, IconButton } from '@mui/material';
 import { IoIosClose } from "react-icons/io";
-import { IoImageOutline } from 'react-icons/io5';
-import { MdAddAPhoto } from 'react-icons/md';
+import { MdAddAPhoto, MdAddPhotoAlternate } from 'react-icons/md';
 import { uploadToCloudinary } from '../../utils/uploadToCloudniry';
 import { useState } from 'react';
 
@@ -32,7 +31,7 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
   const { auth } = useSelector(store => store);
   const [loading, setLoading] = React.useState(false);
   const [selectedImage, setSelectedImage] = useState();
-
+  const [selectedBackgroundImage, setSelectedBackgroundImage] = useState();
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -49,6 +48,17 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
     setSelectedImage(imageUrl);
     setLoading(false);
     formik.setFieldValue("image", imageUrl);
+
+  }
+
+
+  const handleSelectBackgroundImage = async (event) => {
+
+    setLoading(true);
+    const imageUrl = await uploadToCloudinary(event.target.files[0], "image");
+    setSelectedBackgroundImage(imageUrl);
+    setLoading(false);
+    formik.setFieldValue("backgroundImage", imageUrl);
 
   }
 
@@ -92,8 +102,19 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
               </Button>
             </div>
             <div>
-              <div className='h-[15rem]'>
-                <img src='https://images.pexels.com/photos/592077/pexels-photo-592077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='w-full h-full rounded-t-md' />
+              <div className='h-[15rem] '>
+                <img
+                  src={selectedBackgroundImage || auth?.user.backgroundImage || 'https://images.pexels.com/photos/8892/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+                  alt='User Background'
+
+                  className='
+                w-full h-full
+                 transform    
+                 transition-color   
+                 duration-200 
+                 hover:border-4
+                
+                 ' />
 
               </div>
 
@@ -101,9 +122,19 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
               <div className='pl-5 relative ' >
 
 
-                <Avatar className='transform -translate-y-24 ring-4 ring-gray-500 dark:ring-gray-800  '
+                <Avatar
+
+                  className='
+                transform -translate-y-24  
+                rounded-full
+                ring-4 ring-gray-700 
+                dark:ring-gray-800 
+                hover:ring-gray-100
+                transition-color  transform duration-200
+                '
+
                   sx={{ width: "10rem", height: "10rem", bgcolor: auth?.user.image ? "transparent" : auth?.user.randomProfileColorCode }}
-                  src={auth?.user.image || selectedImage || ''}
+                  src={selectedImage || auth?.user.image}
 
 
                 >
@@ -112,26 +143,44 @@ export default function ProfileModal({ open, handleClose, initialValues }) {
                     <span className='text-5xl'>{auth.user?.firstName.charAt(0).toUpperCase()}</span>
                   )}
 
-                  <input
-                    type='file'
-                    accept='image/*'
-                    onChange={handleSelectImage}
-                    style={{ display: "none" }}
-                    id="avatarInput"
-                    name='image'
-
-                  />
-
-
 
 
 
                 </Avatar>
+                <input
+                  type='file'
+                  accept='image/*'
+                  onChange={handleSelectImage}
+                  style={{ display: "none" }}
+                  id="avatarInput"
+                  name='image'
+
+                />
+
+                <input
+                  type='file'
+                  accept='image/*'
+                  onChange={handleSelectBackgroundImage}
+                  style={{ display: "none" }}
+                  id="backgroundInput"
+                  name='backgroundImage'
+
+                />
+
+
+                <label htmlFor='backgroundInput' className='absolute bottom-14 right-1'>
+                  <IconButton color='primary' component="span">
+                    <MdAddPhotoAlternate className='photo-color transition-color  transform duration-200 transform scale-x-[-1]' size={33} />
+                  </IconButton>
+                </label>
+
+
+
 
 
                 <label htmlFor='avatarInput' className='absolute bottom-1 right-1'>
                   <IconButton color='primary' component="span">
-                    <MdAddAPhoto style={{ color: '#b3bbc6' }} size={30} />
+                    <MdAddAPhoto className='photo-color transition-color  transform duration-200 ' size={30} />
                   </IconButton>
                 </label>
 

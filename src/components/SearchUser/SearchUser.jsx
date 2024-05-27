@@ -4,11 +4,7 @@ import { searchUserAction, userFollowAction, userunFollowAction } from '../../Re
 import { Avatar, Button, CardHeader } from '@mui/material';
 
 const SearchUser = () => {
-  const tabs = [
-    { value: "following", name: "Following", },
-    { value: "followers", name: "Followers", },
 
-  ]
   const [query, setQuery] = useState(''); // Arama sorgusu için state tanımı
   
   const dispatch = useDispatch(); // Redux action'larına erişmek için dispatch fonksiyonunu alın
@@ -108,10 +104,24 @@ const SearchUser = () => {
             required />
           <button
             type="submit"
-            class="text-gray-100 absolute end-2.5 bottom-2.5 bg-blue-700 
-          hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
-          font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 
+            class="text-gray-100 
+            
+            absolute 
+            end-2.5 
+            bottom-2.5 
+          
+          font-medium 
+          rounded-lg 
+          text-sm 
+          px-4 
+          py-2 
+          transition-all 
+          duration-300
+          dark:bg-blue-600 
+          dark:hover:bg-blue-700 
           dark:focus:ring-blue-800
+          bg-blue-700 
+
           
           ">Search</button>
 

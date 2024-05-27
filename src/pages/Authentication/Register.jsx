@@ -1,7 +1,6 @@
-import {Alert, Button, TextField, Radio, RadioGroup, FormControlLabel, CircularProgress } from '@mui/material';
+import { Alert, TextField, Radio, RadioGroup, FormControlLabel, CircularProgress } from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React, { useEffect, useState } from 'react';
-import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
 import { registerUserAction } from '../../Redux/Auth/auth.action';
 
@@ -39,6 +38,8 @@ const Register = () => {
 
 
   useEffect(() => {
+    document.title = 'Register';
+
     if (success) {
       const timer = setTimeout(() => {
         setSuccess('');
@@ -66,19 +67,19 @@ const Register = () => {
     try {
       await dispatch(registerUserAction({ data: updatedValues }));
 
-      setTimeout(() =>{
+      setTimeout(() => {
         setLoading(false);
         window.location.href = '/';
         setSuccess('Registered successfully');
 
-      },4000);
+      }, 4000);
 
-    }catch (err) {
+    } catch (err) {
       setLoading(false);
       setError('Something went wrong');
-      setTimeout(() =>{
+      setTimeout(() => {
         setError('');
-      },3000);
+      }, 3000);
 
     }
 
@@ -198,12 +199,49 @@ const Register = () => {
             <div className="flex items-center h-5">
               <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
-            <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{ color: 'white' }}>I agree with the <a href="#" className="text-gray-100 hover:underline " style={{ textDecoration: 'underline' }}> terms and conditions</a></label>
+            <label htmlFor="terms" className="ms-2 text-sm font-kanit dark:text-gray-300" style={{ color: 'white' }}>I agree with the <a href="www.mix.com" className="text-gray-100 hover:underline " style={{ textDecoration: 'underline' }}> terms and conditions</a></label>
           </div>
           <button type="submit"
-            className="w-full text-white bg-blue-800 
-          hover:bg-blue-700  font-kanit 
-           rounded-lg text-sm px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700" style={{ color: 'white' }}>Register</button>
+
+            className="
+           w-full 
+           font-kanit 
+           rounded-lg 
+           text-sm 
+           px-5 
+           py-3 
+           text-center 
+           text-gray-100
+           justify-center 
+           relative
+           overflow-hidden 
+           
+           bg-blue-800 
+                     
+           relative
+           dark:hover:bg-blue-700 
+           dark:hover:border-gray-600
+
+                 
+           transition-all 
+           duration-300
+           before:absolute 
+           before:inset-0 
+           before:border-0 
+           before:border-white
+          before:duration-100 
+          before:ease-linear 
+          
+          hover:shadow-blue-600 
+           "
+
+          >
+            <span class="relative z-10">Register</span>
+
+
+          </button>
+
+
 
           <p class="text-sm font-light text-gray-100 font-kanit justify-center">
             If you have already account? <a href="/login" class="font-medium text-blue-200 hover:underline">Sign in</a>
@@ -235,7 +273,7 @@ const Register = () => {
           className="fixed bottom-4 left-0 right-0 flex justify-center"
         >
           <Alert
-            variant="filled" 
+            variant="filled"
             severity="error"
             style={{ color: 'white' }}
           >
@@ -244,7 +282,7 @@ const Register = () => {
         </div>
       )}
 
-{success && (
+      {success && (
         <div className="fixed bottom-4 left-0 right-0 flex justify-center">
           <Alert variant="filled" severity="success" style={{ color: 'white' }}>
             {success}

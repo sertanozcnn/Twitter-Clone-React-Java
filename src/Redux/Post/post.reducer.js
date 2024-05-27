@@ -1,5 +1,5 @@
-import { GET_USER_POST_REQUEST, GET_USER_POST_SUCCESS } from "../Auth/auth.actionType";
-import { CREATE_COMMENT_FAILURE, CREATE_COMMENT_SUCCESS, CREATE_POST_FAILURE, CREATE_POST_REQUEST, CREATE_POST_SUCCESS, GET_ALL_POST_FAILURE, GET_ALL_POST_REQUEST, GET_ALL_POST_SUCCESS, GET_COMMENTS_FAILURE, GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_SAVED_POSTS_FAILURE, GET_SAVED_POSTS_REQUEST, GET_SAVED_POSTS_SUCCESS, GET_USERS_POST_FAILURE, GET_USERS_POST_SUCCESS, LIKE_POST_COUNT_FAILURE, LIKE_POST_COUNT_REQUEST, LIKE_POST_COUNT_SUCCESS, LIKE_POST_FAILURE, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, SAVE_POST_FAILURE, SAVE_POST_REQUEST, SAVE_POST_SUCCESS, UNLIKE_POST_FAILURE, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNSAVE_POST_FAILURE, UNSAVE_POST_REQUEST, UNSAVE_POST_SUCCESS } from "./post.actionType"
+import { GET_USER_POST_REQUEST } from "../Auth/auth.actionType";
+import { CREATE_COMMENT_FAILURE, CREATE_COMMENT_SUCCESS, CREATE_POST_FAILURE, CREATE_POST_REQUEST, CREATE_POST_SUCCESS, DELETE_USERS_POSTS_FAILURE, DELETE_USERS_POSTS_REQUEST, DELETE_USERS_POSTS_SUCCESS, GET_ALL_POST_FAILURE, GET_ALL_POST_REQUEST, GET_ALL_POST_SUCCESS,  GET_LIKED_POSTS_FAILURE, GET_LIKED_POSTS_REQUEST, GET_LIKED_POSTS_SUCCESS, GET_SAVED_POSTS_FAILURE, GET_SAVED_POSTS_REQUEST, GET_SAVED_POSTS_SUCCESS, GET_USERS_POST_FAILURE, GET_USERS_POST_SUCCESS, LIKE_POST_COUNT_FAILURE, LIKE_POST_COUNT_REQUEST, LIKE_POST_COUNT_SUCCESS, LIKE_POST_FAILURE, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, SAVE_POST_FAILURE, SAVE_POST_REQUEST, SAVE_POST_SUCCESS, UNLIKE_POST_FAILURE, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNSAVE_POST_FAILURE, UNSAVE_POST_REQUEST, UNSAVE_POST_SUCCESS } from "./post.actionType"
 
 const initalState = {
     post: null,
@@ -27,6 +27,8 @@ export const postReducer = (state = initalState, action) => {
         case SAVE_POST_REQUEST:
         case UNSAVE_POST_REQUEST:
         case GET_SAVED_POSTS_REQUEST:
+        case GET_LIKED_POSTS_REQUEST:
+        case DELETE_USERS_POSTS_REQUEST:
             return { ...state, error: null, loading: false };
 
 
@@ -123,7 +125,7 @@ export const postReducer = (state = initalState, action) => {
                         return action.payload;
                     }
                     return post;
-                }), 
+                }),
                 loading: false,
                 error: null
             };
@@ -132,11 +134,34 @@ export const postReducer = (state = initalState, action) => {
             return {
                 ...state,
                 savedPosts: action.payload,
-                
+
                 loading: false,
                 error: null
             };
 
+
+        case GET_LIKED_POSTS_SUCCESS: // Eklendi
+            return {
+                ...state,
+                likedPosts: action.payload,
+
+                loading: false,
+                error: null
+            };
+
+        case DELETE_USERS_POSTS_SUCCESS:
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.id) {
+                        return action.payload;
+                    }
+                    return post;
+                }),
+                
+                loading: false,
+                error: null,
+            };
 
 
 
@@ -152,6 +177,8 @@ export const postReducer = (state = initalState, action) => {
         case SAVE_POST_FAILURE:
         case UNSAVE_POST_FAILURE:
         case GET_SAVED_POSTS_FAILURE:
+        case GET_LIKED_POSTS_FAILURE:
+        case DELETE_USERS_POSTS_FAILURE:
             return {
                 ...state,
                 error: action.payload,

@@ -1,5 +1,4 @@
-    import { Avatar, Button, CardHeader, Typography } from '@mui/material'
-    import { red } from '@mui/material/colors'
+    import { Avatar, Button, CardHeader } from '@mui/material'
     import React from 'react'
 
     const UserCardFollowing = ({ user ,isFollowingControl,handleAction}) => {
@@ -13,8 +12,6 @@
             setIsFollowing(true);
         };
 
-        
-
         return (
             <div>
                 <CardHeader
@@ -24,11 +21,8 @@
                             src={user.image || ''}
                             sx={{ bgcolor: user.image ? "transparent" : user.randomProfileColorCode }} aria-label="recipe">
                             <span >{user.firstName.charAt(0).toUpperCase()}</span>
-                        
-
                         </Avatar>
                     }
-
 
                     action={
                         isFollowingControl ? (
@@ -39,7 +33,6 @@
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
                             onClick={handleAction} // handleAction prop'u kullanıldı
-
 
                             >
                                 {isFollowing ? "Following" : "Unfollow"}

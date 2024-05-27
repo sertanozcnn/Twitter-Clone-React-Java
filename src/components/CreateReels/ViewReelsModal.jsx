@@ -13,7 +13,7 @@ const style = {
     bgcolor: '#211b44',
     border: '1px solid #000',
     boxShadow: 24,
-    overflowY: 'auto', // Scroll yapılabilirlik ekledik
+    overflowY: 'auto', 
     maxHeight: '80vh',
 
 };
@@ -47,7 +47,6 @@ const ViewReelsModal = ({ handleClose, open, userId }) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style} className='rounded-lg  w-1/3 '>
-
                     <video 
                     className="w-full h-fit" 
                     posterResizeMode="cover"
@@ -55,7 +54,6 @@ const ViewReelsModal = ({ handleClose, open, userId }) => {
                      src={videoUrl} controls>
                         <source type="video/mp4" />
                     </video>
-
                     <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', textAlign: 'center', color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)', width: '100%' }}>
                         <p className='font-kanit text-gray-100' style={{ margin: 10 }}>{title}</p>
                     </div>

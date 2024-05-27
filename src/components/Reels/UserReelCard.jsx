@@ -11,7 +11,7 @@ const UserReelCard = ({ item }) => {
   };
 
   return (
-    <div className='w-[10rem] overflow-hidden'>
+    <div className='w-[15rem] overflow-hidden'>
       <div
         className='pt-4 relative'
         onMouseEnter={() => {

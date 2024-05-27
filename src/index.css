@@ -85,3 +85,70 @@ code {
 .postcard-share:hover{
   color: #00ba7c;
 }
+
+.middle-color{
+  color: #b3bbc6;
+
+}
+
+
+.middle-color:hover{
+  color: #6366f1;
+
+}
+
+
+.chat-color{
+  color:#b3bbc6
+
+}
+
+.chat-color:hover{
+  color:#1d9bf0
+
+}
+
+.share-color{
+
+  color:#b3bbc6
+
+}
+
+.share-color:hover{
+  
+  color:#00ba7c
+}
+
+
+.like-color{
+
+  color:#b3bbc6
+
+}
+
+.like-color:hover{
+  
+  color:#f91880
+}
+
+
+.saved-color{
+
+  color:#b3bbc6
+
+}
+
+.saved-color:hover{
+  
+  color:#1d9bf0
+}
+
+.photo-color{
+  color:#b3bbc6
+}
+
+.photo-color:hover{
+  color:#ffffff
+}
+
+

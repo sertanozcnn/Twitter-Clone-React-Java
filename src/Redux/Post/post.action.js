@@ -1,7 +1,5 @@
-import { type } from "@testing-library/user-event/dist/type"
-import { CREATE_COMMENT_FAILURE, CREATE_COMMENT_REQUEST, CREATE_COMMENT_SUCCESS, CREATE_POST_FAILURE, CREATE_POST_REQUEST, CREATE_POST_SUCCESS, GET_ALL_POST_FAILURE, GET_ALL_POST_REQUEST, GET_ALL_POST_SUCCESS, GET_COMMENTS_FAILURE, GET_COMMENTS_REQUEST, GET_COMMENTS_SUCCESS, GET_SAVED_POSTS_FAILURE, GET_SAVED_POSTS_REQUEST, GET_SAVED_POSTS_SUCCESS, GET_USERS_POST_FAILURE, GET_USERS_POST_REQUEST, GET_USERS_POST_SUCCESS, LIKE_POST_COUNT_FAILURE, LIKE_POST_COUNT_REQUEST, LIKE_POST_COUNT_SUCCESS, LIKE_POST_FAILURE, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, SAVE_POST_FAILURE, SAVE_POST_REQUEST, SAVE_POST_SUCCESS, UNLIKE_POST_FAILURE, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNSAVE_POST_FAILURE, UNSAVE_POST_REQUEST, UNSAVE_POST_SUCCESS } from "./post.actionType"
+import { CREATE_COMMENT_FAILURE, CREATE_COMMENT_REQUEST, CREATE_COMMENT_SUCCESS, CREATE_POST_FAILURE, CREATE_POST_REQUEST, CREATE_POST_SUCCESS, DELETE_USERS_POSTS_FAILURE, DELETE_USERS_POSTS_REQUEST, DELETE_USERS_POSTS_SUCCESS, GET_ALL_POST_FAILURE, GET_ALL_POST_REQUEST, GET_ALL_POST_SUCCESS,  GET_LIKED_POSTS_FAILURE, GET_LIKED_POSTS_REQUEST, GET_LIKED_POSTS_SUCCESS, GET_SAVED_POSTS_FAILURE, GET_SAVED_POSTS_REQUEST, GET_SAVED_POSTS_SUCCESS, GET_USERS_POST_FAILURE, GET_USERS_POST_REQUEST, GET_USERS_POST_SUCCESS, LIKE_POST_COUNT_FAILURE, LIKE_POST_COUNT_REQUEST, LIKE_POST_COUNT_SUCCESS, LIKE_POST_FAILURE, LIKE_POST_REQUEST, LIKE_POST_SUCCESS, SAVE_POST_FAILURE, SAVE_POST_REQUEST, SAVE_POST_SUCCESS, UNLIKE_POST_FAILURE, UNLIKE_POST_REQUEST, UNLIKE_POST_SUCCESS, UNSAVE_POST_FAILURE, UNSAVE_POST_REQUEST, UNSAVE_POST_SUCCESS } from "./post.actionType"
 import { API_BASE_URL, api } from '../../config/api';
-import { ImSpades } from "react-icons/im";
 
 export const createPostAction = (postData) => async (dispatch) => {
 
@@ -162,3 +160,38 @@ export const getSavedPostAction = (jwt,userId) => async (dispatch) => {
         dispatch({ type: GET_SAVED_POSTS_FAILURE, payload: error });
     }
 }
+
+
+export const getLikedPostAction = (jwt,userId) => async (dispatch) => {
+    dispatch({ type: GET_LIKED_POSTS_REQUEST });
+    try {
+        const { data } = await api.get(`/api/posts/liked-posts/${userId}`, {
+
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        });
+        dispatch({ type: GET_LIKED_POSTS_SUCCESS, payload: data });
+        console.log('LİKED posts retrieved successfully----------------:', data);
+
+    } catch (error) {
+        console.error('Error retrieving saved posts ----------------', error);
+        dispatch({ type: GET_LIKED_POSTS_FAILURE, payload: error });
+    }
+}
+
+export const deleteUserPostAction = (jwt,postId) => async (dispatch) => {
+    dispatch({ type: DELETE_USERS_POSTS_REQUEST });
+    try {
+        const { data } = await api.delete(`${API_BASE_URL}/api/posts/${postId}`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+        });
+        dispatch({ type: DELETE_USERS_POSTS_SUCCESS, payload: data });
+        console.log("Deleted Post", data);
+    } catch (error) {
+        console.log("Error", error);
+        dispatch({ type: DELETE_USERS_POSTS_FAILURE, payload: error });
+    }
+};

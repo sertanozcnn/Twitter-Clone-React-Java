@@ -1,7 +1,6 @@
 import { Avatar } from '@mui/material'
-import React, { useEffect } from 'react'
-import { getLastFiveUsersAction } from '../../Redux/Auth/auth.action';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react'
+
 
 const StoryCircle = ({ user, onClick }) => {
 
@@ -12,28 +11,35 @@ const StoryCircle = ({ user, onClick }) => {
       <div className='
        
        flex flex-col justify-center items-center ml-4 cursor-pointer
-       ring-2 ring-red-900 hover:ring-red-400  rounded-full
-        p-1
-        hover:bg-gradient-to-r hover:from-grad-200 hover:via-grad-300 hover:to-grad-100
+       p-1
+       ring-2 
+       ring-red-900 
+       hover:ring-red-400  
+       rounded-full
+       hover:bg-gradient-to-r 
+       hover:from-avatarColor-200 
+       hover:via-avatarColor-100 
+       hover:to-avatarColor-300
+      transition-all 
        '>
         <Avatar
           src={user.image || ''}
 
           onClick={() => onClick(user.id)}
 
-          
-          sx={{ 
-            
-            width: "3.5rem", height: "3.5rem", 
-            bgcolor: user.image ? "transparent" : user.randomProfileColorCode 
-            
 
-            }} aria-label="recipe">
+          sx={{
+
+            width: "3.5rem", height: "3.5rem",
+            bgcolor: user.image ? "transparent" : user.randomProfileColorCode
+
+
+          }} aria-label="recipe">
 
           {!user.image && (
             <span className='text-xl' >{user.firstName.charAt(0).toUpperCase()}</span>
           )}
-          
+
 
 
 
@@ -43,12 +49,12 @@ const StoryCircle = ({ user, onClick }) => {
 
 
 
-      </div>
+      </div >
 
       <p className='font-kanit-regular text-gray-200 ml-6' >{user.firstName}..</p>
 
 
-    </div>
+    </div >
   )
 }
 
