@@ -27,7 +27,6 @@ const PostCard = ({ item }) => {
   const handleShowComment = () => setShowComments(!showComments);
 
   const { auth } = useSelector(store => store);
-  const { likePostCount } = useSelector(state => state.post);
   const [anchorEl, setAnchorEl] = useState(null); 
 
   const open = Boolean(anchorEl);
@@ -132,9 +131,9 @@ const PostCard = ({ item }) => {
 
 
 
-  console.log("is liked", isLikedByReqUser(auth.user.id, item))
+  //console.log("is liked", isLikedByReqUser(auth.user.id, item))
 
-  console.log("is saved", isSavedByReqUser(auth.user.id, item))
+  //console.log("is saved", isSavedByReqUser(auth.user.id, item))
 
 
 
@@ -145,7 +144,7 @@ const PostCard = ({ item }) => {
   }
 
 
-  console.log("likePostCount", likePostCount);
+ //console.log("likePostCount", likePostCount);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

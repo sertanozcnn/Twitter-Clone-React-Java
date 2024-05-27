@@ -47,7 +47,7 @@ const Profile = () => {
     dispatch(getAllReelsUsers(localStorage.getItem('jwt'), auth.user?.id));
   }, [dispatch, auth.user?.id]);
 
-  console.log("auth", auth);
+  //console.log("auth", auth);
 
   const userPosts = post.posts;
   const savedPosts = post.savedPosts;
@@ -57,14 +57,13 @@ const Profile = () => {
   const userReels = reels.allReels;
   const likedPosts = post.likedPosts;
 
-  //const userListLast = reels.viewReels || [];
 
 
 
-  console.log("postCount", postCount);
-  console.log("savedPosts -----", savedPosts);
-  console.log("userreels -----", userReels);
-  console.log("likedPosts ----", likedPosts);
+  //console.log("postCount", postCount);
+  //console.log("savedPosts -----", savedPosts);
+  //console.log("userreels -----", userReels);
+  //console.log("likedPosts ----", likedPosts);
 
 
   return (

@@ -7,9 +7,9 @@ export const createPostAction = (postData) => async (dispatch) => {
     try {
         const { data } = await api.post(`/api/posts`, postData);
         dispatch({ type: CREATE_POST_SUCCESS, payload: data });
-        console.log("Created Post", data);
+         //console.log("Created Post", data);
     } catch (error) {
-        console.log("Error", error);
+         //console.log("Error", error);
         dispatch({ type: CREATE_POST_FAILURE, payload: error })
     }
 }
@@ -20,9 +20,9 @@ export const getAllPostAction = () => async (dispatch) => {
     try {
         const { data } = await api.get(`/api/posts`);
         dispatch({ type: GET_ALL_POST_SUCCESS, payload: data });
-        console.log("Get All Post", data);
+         //console.log("Get All Post", data);
     } catch (error) {
-        console.log("Error", error);
+         //console.log("Error", error);
         dispatch({ type: GET_ALL_POST_FAILURE, payload: error })
     }
 }
@@ -44,9 +44,9 @@ export const getUsersPostAction = (jwt, userId) => async (dispatch) => {
 
 
 
-        console.log("Get Users Post", data);
+        //console.log("Get Users Post", data);
     } catch (error) {
-        console.log("Error", error);
+        //console.log("Error", error);
         dispatch({ type: GET_USERS_POST_FAILURE, payload: error })
     }
 }
@@ -58,9 +58,9 @@ export const likePostAction = (postId) => async (dispatch) => {
     try {
         const { data } = await api.put(`/api/posts/like/${postId}`);
         dispatch({ type: LIKE_POST_SUCCESS, payload: data });
-        console.log("Liked Post", data);
+         //console.log("Liked Post", data);
     } catch (error) {
-        console.log("Error", error);
+         //console.log("Error", error);
         dispatch({ type: LIKE_POST_FAILURE, payload: error })
     }
 }
@@ -70,9 +70,9 @@ export const unlikePostAction = (postId) => async (dispatch) => {
     try {
         const { data } = await api.delete(`/api/posts/unlike/${postId}`);
         dispatch({ type: UNLIKE_POST_SUCCESS, payload: data });
-        console.log("Unliked Post", data);
+         //console.log("Unliked Post", data);
     } catch (error) {
-        console.log("Error", error);
+         //console.log("Error", error);
         dispatch({ type: UNLIKE_POST_FAILURE, payload: error });
     }
 };
@@ -86,9 +86,9 @@ export const createCommentAction = (reqData) => async (dispatch) => {
     try {
         const { data } = await api.post(`/api/comments/post/${reqData.postId}`, reqData.data);
         dispatch({ type: CREATE_COMMENT_SUCCESS, payload: data });
-        console.log("Created Comment", data);
+         //console.log("Created Comment", data);
     } catch (error) {
-        console.log("Error", error);
+         //console.log("Error", error);
         dispatch({ type: CREATE_COMMENT_FAILURE, payload: error })
     }
 }
@@ -106,10 +106,10 @@ export const getLikedPostCountAction = (jwt, postId) => async (dispatch) => {
         });
 
         dispatch({ type: LIKE_POST_COUNT_SUCCESS, payload: data });
-        console.log("post liked count success ----", data); // Payload değerini konsola yazdırın
+         //console.log("post liked count success ----", data); // Payload değerini konsola yazdırın
 
     } catch (error) {
-        console.log("post liked count failure------", error);
+         //console.log("post liked count failure------", error);
         dispatch({ type: LIKE_POST_COUNT_FAILURE, payload: error });
     }
 
@@ -121,9 +121,9 @@ export const savePostAction = (postId) => async (dispatch) => {
     try {
         const { data } = await api.put(`/api/posts/save/${postId}`);
         dispatch({ type: SAVE_POST_SUCCESS, payload: data });
-        console.log('Post saved successfully:', data);
+         //console.log('Post saved successfully:', data);
     } catch (error) {
-        console.error('Error saving post:', error);
+         //console.error('Error saving post:', error);
         dispatch({ type: SAVE_POST_FAILURE, payload: error });
     }
 };
@@ -135,9 +135,9 @@ export const unsavedPostAction = (postId) => async (dispatch) => {
         const { data } = await api.delete(`/api/posts/unsave/${postId}`);
 
         dispatch({ type: UNSAVE_POST_SUCCESS, payload: data });
-        console.log('Post unsaved successfully:', data);
+         //console.log('Post unsaved successfully:', data);
     } catch (error) {
-        console.error('Error unsaving post:', error);
+         //console.error('Error unsaving post:', error);
         dispatch({ type: UNSAVE_POST_FAILURE, payload: error });
     }
 };
@@ -153,10 +153,10 @@ export const getSavedPostAction = (jwt,userId) => async (dispatch) => {
             },
         });
         dispatch({ type: GET_SAVED_POSTS_SUCCESS, payload: data });
-        console.log('Saved posts retrieved successfully----------------:', data);
+         //console.log('Saved posts retrieved successfully----------------:', data);
 
     } catch (error) {
-        console.error('Error retrieving saved posts ----------------', error);
+         //console.error('Error retrieving saved posts ----------------', error);
         dispatch({ type: GET_SAVED_POSTS_FAILURE, payload: error });
     }
 }
@@ -172,10 +172,10 @@ export const getLikedPostAction = (jwt,userId) => async (dispatch) => {
             },
         });
         dispatch({ type: GET_LIKED_POSTS_SUCCESS, payload: data });
-        console.log('LİKED posts retrieved successfully----------------:', data);
+         //console.log('LİKED posts retrieved successfully----------------:', data);
 
     } catch (error) {
-        console.error('Error retrieving saved posts ----------------', error);
+         //console.error('Error retrieving saved posts ----------------', error);
         dispatch({ type: GET_LIKED_POSTS_FAILURE, payload: error });
     }
 }
@@ -189,9 +189,9 @@ export const deleteUserPostAction = (jwt,postId) => async (dispatch) => {
             },
         });
         dispatch({ type: DELETE_USERS_POSTS_SUCCESS, payload: data });
-        console.log("Deleted Post", data);
+         //console.log("Deleted Post", data);
     } catch (error) {
-        console.log("Error", error);
+         //console.log("Error", error);
         dispatch({ type: DELETE_USERS_POSTS_FAILURE, payload: error });
     }
 };

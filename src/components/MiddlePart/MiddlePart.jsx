@@ -27,7 +27,7 @@ const MiddlePart = () => {
   const [openViewReelsModal, setOpenViewReelsModal] = useState(false);
 
   const { auth } = useSelector(store => store);
-  console.log("Post Store", post);
+  //console.log("Post Store", post);
   const handleCloseCreatePostModal = () => setOpenCreatePostModal(false);
   const handleCloseCreateReelsModal = () => setOpenCreateReelsModal(false);
   const handleCloseViewReelsModal = () => setOpenViewReelsModal(false);
@@ -35,19 +35,19 @@ const MiddlePart = () => {
 
   const handleOpenCreatePostModal = () => {
     setOpenCreatePostModal(true);
-    console.log("Open Create Post Modal", openCreatePostModal);
+    //console.log("Open Create Post Modal", openCreatePostModal);
   }
 
   const handleOpenCreateReelsModal = () => {
     setOpenCreateReelsModal(true);
-    console.log("Open Create Reels Modal", openCreateReelsModal);
+    //console.log("Open Create Reels Modal", openCreateReelsModal);
   }
 
 
 
   const handleOpenViewReelsModal = async (userId) => {
     setSelectedUserId(userId);
-    console.log("Open View Reels Modal", openViewReelsModal);
+    //console.log("Open View Reels Modal", openViewReelsModal);
 
     setOpenViewReelsModal(true);
   }
@@ -62,7 +62,7 @@ const MiddlePart = () => {
 
   const userLastFive = auth.lastFiveUsers;
 
-  console.log("user lastFive", userLastFive)
+  //console.log("user lastFive", userLastFive)
 
 
 

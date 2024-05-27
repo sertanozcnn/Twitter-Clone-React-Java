@@ -98,7 +98,10 @@ const Login = () => {
                 as={TextField}
                 name="email"
                 className=" shadow-sm bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light"
-                type="email" variant="outlined" fullWidth />
+                type="email" 
+                variant="outlined"
+                autoComplete="email"
+                 fullWidth />
               <ErrorMessage name="email" component={"div"} className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </div>
@@ -109,8 +112,11 @@ const Login = () => {
                 as={TextField}
                 name="password"
                 className="shadow-sm bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-white dark:focus:border-blue-500 dark:shadow-sm-light"
-                type="password" variant="outlined" fullWidth />
-              <ErrorMessage name="password" component="div" className='font-kanit text-gray-100 ml-1 mt-2' />
+                type="password"
+                autoComplete="current-password"
+                 variant="outlined"
+                  fullWidth />
+              <ErrorMessage name="password" component={"div"} className='font-kanit text-gray-100 ml-1 mt-2' />
 
             </div>
           </div>

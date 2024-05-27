@@ -11,11 +11,11 @@ export const loginUserAction = (loginData) => async (dispatch) => {
         if (data.token) {
             localStorage.setItem("jwt", data.token);
         }
-        console.log("login success", data);
+        //console.log("login success", data);
 
         dispatch({ type: LOGIN_SUCCESS, payload: data.jwt });
     } catch (error) {
-        console.log("user login fail ------", error);
+        //console.log("user login fail ------", error);
         if (error.response && error.response.status === 400) {
             dispatch({ type: LOGIN_FAILURE, payload: 'Invalid email or password' });
         } else {
@@ -35,10 +35,10 @@ export const registerUserAction = (registerData) => async (dispatch) => {
         if (data.token) {
             localStorage.setItem("jwt", data.token);
         }
-        console.log("register----", data);
+        //console.log("register----", data);
         dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
     } catch (error) {
-        console.log("user register fail ------", error);
+        //console.log("user register fail ------", error);
         if(error.response && error.response.status === 400){
             dispatch({ type: REGISTER_FAILURE, payload: "Account already exists." });
         }else{
@@ -62,10 +62,10 @@ export const getProfileAction = (jwt) => async (dispatch) => {
                 });
 
 
-        console.log("profile----", data);
+         //console.log("profile----", data);
         dispatch({ type: GET_PROFILE_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user get fail------", error);
+         //console.log("user get fail------", error);
         dispatch({ type: GET_PROFILE_FAILURE, payload: error });
     }
 }
@@ -78,10 +78,10 @@ export const updateProfileAction = (reqData) => async (dispatch) => {
         const { data } = await api.put(`${API_BASE_URL}/api/users`, reqData);
 
 
-        console.log("update profile ----", data);
+         //console.log("update profile ----", data);
         dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user update fail ------", error);
+         //console.log("user update fail ------", error);
         dispatch({ type: UPDATE_PROFILE_FAILURE, payload: error });
     }
 }
@@ -101,10 +101,10 @@ export const userGetPostCount = (jwt, userId) => async (dispatch) => {
             },
         });
 
-        console.log("post_count ----", data); 
+         //console.log("post_count ----", data); 
         dispatch({ type: GET_USER_POST_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user get post count fail------", error);
+         //console.log("user get post count fail------", error);
         dispatch({ type: GET_USER_POST_FAILURE, payload: error });
     }
 }
@@ -120,10 +120,10 @@ export const userFollowingsCount = (jwt, userId) => async (dispatch) => {
             },
         });
 
-        console.log("followings_count ----", data); 
+         //console.log("followings_count ----", data); 
         dispatch({ type: GET_FOLLOWINGS_COUNT_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user follow count fail------", error);
+         //console.log("user follow count fail------", error);
         dispatch({ type: GET_FOLLOWINGS_COUNT_FAILURE, payload: error });
     }
 
@@ -140,10 +140,10 @@ export const userFollowersCount = (jwt, userId) => async (dispatch) => {
             },
         });
 
-        console.log("followings_count ----", data); 
+         //console.log("followings_count ----", data); 
         dispatch({ type: GET_FOLLOWERS_COUNT_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user followers count fail------", error);
+         //console.log("user followers count fail------", error);
         dispatch({ type: GET_FOLLOWINGS_COUNT_FAILURE, payload: error });
     }
 
@@ -160,10 +160,10 @@ export const getFollowingDetails = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("followings_count ----", data); 
+         //console.log("followings_count ----", data); 
         dispatch({ type: GET_FOLLOWING_DETAILS_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user followings count fail------", error);
+         //console.log("user followings count fail------", error);
         dispatch({ type: GET_FOLLOWING_DETAILS_REQUEST, payload: error });
     }
 
@@ -180,10 +180,10 @@ export const getFollowersDetails = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("followers_count ----", data); 
+         //console.log("followers_count ----", data); 
         dispatch({ type: GET_FOLLOWERS_DETAILS_SUCCESS, payload: data });
     } catch (error) {
-        console.log("user followers count fail------", error);
+         //console.log("user followers count fail------", error);
         dispatch({ type: GET_FOLLOWERS_DETAILS_REQUEST, payload: error });
     }
 
@@ -201,10 +201,10 @@ export const userFollowAction = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("User Follow Success ----", data); 
+         //console.log("User Follow Success ----", data); 
         dispatch({ type: USER_FOLLOWING_SUCCESS, payload: data });
     } catch (error) {
-        console.log("User Follow Failed -----", error);
+         //console.log("User Follow Failed -----", error);
         dispatch({ type: USER_FOLLOWING_FAILURE, payload: error });
     }
 
@@ -221,10 +221,10 @@ export const userunFollowAction = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("User UNFollow Success ----", data); 
+         //console.log("User UNFollow Success ----", data); 
         dispatch({ type: USER_UNFOLLOWING_SUCCESS, payload: data });
     } catch (error) {
-        console.log("User UNFollow Failed -----", error);
+         //console.log("User UNFollow Failed -----", error);
         dispatch({ type: USER_UNFOLLOWING_FAILURE, payload: error });
     }
 
@@ -242,10 +242,10 @@ export const getAllUsersAction = (jwt) => async (dispatch) => {
             },
         });
 
-        console.log("User GETALL Success ----", data); 
+         //console.log("User GETALL Success ----", data); 
         dispatch({ type: GET_ALL_USERS_SUCCESS, payload: data });
     } catch (error) {
-        console.log("User GETALL Failed -----", error);
+         //console.log("User GETALL Failed -----", error);
         dispatch({ type: GET_ALL_USERS_FAILURE, payload: error });
     }
 
@@ -263,10 +263,10 @@ export const getLastFiveUsersAction = (jwt) => async (dispatch) => {
             },
         });
 
-        console.log("User LAST Success ----", data); 
+         //console.log("User LAST Success ----", data); 
         dispatch({ type: GET_LAST_FIVE_USERS_SUCCESS, payload: data });
     } catch (error) {
-        console.log("User LAST Failed -----", error);
+         //console.log("User LAST Failed -----", error);
         dispatch({ type: GET_LAST_FIVE_USERS_FAILURE, payload: error });
     }
 
@@ -286,7 +286,7 @@ export const logoutUserAction = () => async (dispatch) => {
         dispatch({ type: LOGOUT_SUCCESS }); 
 
     } catch (error) {
-        console.log("Logout failed:", error);
+         //console.log("Logout failed:", error);
         
     }
 
@@ -301,10 +301,10 @@ export const searchUserAction = (jwt, query) => async (dispatch) => {
                 Authorization: `Bearer ${jwt}`,
             },
         });
-        console.log("SEARCH Success ----", data); 
+         //console.log("SEARCH Success ----", data); 
         dispatch({ type: SEARCH_USER_SUCCESS, payload: data });
     } catch (error) {
-        console.log("User search failed:", error);
+         //console.log("User search failed:", error);
         dispatch({ type: SEARCH_USER_FAILURE, payload: error });
     }
 };

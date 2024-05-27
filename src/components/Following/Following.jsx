@@ -32,7 +32,6 @@ const Following = () => {
     const userPosts = auth.followingDetails;
     const userGetFollowers = auth.followersDetails;
 
-
     useEffect(() => {
         const tabs = [
             { value: "following", name: "Following", },

@@ -38,7 +38,7 @@ const CreatePostModal = ({ handleClose, open }) => {
         dispatch(createPostAction(values))
         setLoading(false);
         handleClose();
-        console.log("formik values", values);
+        //console.log("formik values", values);
     }
 
     //post form value

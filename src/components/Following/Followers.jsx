@@ -33,11 +33,9 @@ const Followers = () => {
 
     const userPosts = auth.followingDetails;
     const userGetFollowers = auth.followersDetails;
-    const isFollowingControl = false;
-
-
-    console.log("isFollowingControl",isFollowingControl);
-    console.log("auth user",auth.user);
+   
+    //console.log("isFollowingControl",isFollowingControl);
+    //console.log("auth user",auth.user);
 
     useEffect(() => {
         const tabs = [

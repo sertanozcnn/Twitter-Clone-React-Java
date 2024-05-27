@@ -45,7 +45,7 @@ const CreateReelsModal = ({ handleClose, open }) => {
         dispatch(createReelsAction(values))
         setLoading(false);
         handleClose();
-        console.log("formik values", values);
+        //console.log("formik values", values);
     }
 
     //Form Reels Values

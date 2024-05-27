@@ -5,11 +5,11 @@ import { Avatar, Button, CardHeader } from '@mui/material';
 
 const SearchUser = () => {
 
-  const [query, setQuery] = useState(''); // Arama sorgusu için state tanımı
+  const [query, setQuery] = useState(''); 
   
-  const dispatch = useDispatch(); // Redux action'larına erişmek için dispatch fonksiyonunu alın
+  const dispatch = useDispatch(); 
   const { auth } = useSelector(store => store);
-  const [userSearchSubmit, setUserSearchSubmit] = useState([]); // Arama sonuçları için state tanımı
+  const [userSearchSubmit, setUserSearchSubmit] = useState([]); 
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -45,20 +45,20 @@ const SearchUser = () => {
   };
 
   const handleFollow = (userId) => {
-    // Kullanıcıyı takip etme işlemi
+  
     dispatch(userFollowAction(localStorage.getItem('jwt'), userId));
   };
 
   const handleunFollow = (userId) => {
-    // Kullanıcıyı takip etme işlemi
+   
     dispatch(userunFollowAction(localStorage.getItem('jwt'), userId));
   };
 
 
 
   const clearSearchResults = () => {
-    setUserSearchSubmit([]); // Arama sonuçlarını temizle
-    setQuery(''); // Query'yi temizle
+    setUserSearchSubmit([]); 
+    setQuery(''); 
   };
 
 
@@ -73,7 +73,7 @@ const SearchUser = () => {
     }
   }, [query]);
 
-  console.log("userSearchSubmit---- ", userSearchSubmit);
+  //console.log("userSearchSubmit---- ", userSearchSubmit);
 
 
 
@@ -130,7 +130,6 @@ const SearchUser = () => {
 
       {userSearchSubmit && userSearchSubmit.length > 0 && userSearchSubmit.map((user) => (
         <div key={user.id}>
-          {/* Diğer kullanıcı bilgilerini burada gösterebilirsiniz */}
 
           <CardHeader
 

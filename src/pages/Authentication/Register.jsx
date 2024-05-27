@@ -62,7 +62,7 @@ const Register = () => {
     updatedValues.gender = gender;
 
 
-    console.log("handle submit", updatedValues);
+    //console.log("handle submit", updatedValues);
 
     try {
       await dispatch(registerUserAction({ data: updatedValues }));
@@ -87,7 +87,7 @@ const Register = () => {
   };
 
   const handleChange = (event) => {
-    console.log(event.target.value); // Değeri kontrol etmek için konsola yazdırın
+    //console.log(event.target.value); 
     setGender(event.target.value);
 
   };

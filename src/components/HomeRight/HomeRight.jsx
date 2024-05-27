@@ -62,7 +62,7 @@ const HomeRight = () => {
 
 
 
-  console.log("userPopulars:", userPopulars);
+  //console.log("userPopulars:", userPopulars);
 
   return (
     <div className='py-5  md:max-xl:px-10  '>
