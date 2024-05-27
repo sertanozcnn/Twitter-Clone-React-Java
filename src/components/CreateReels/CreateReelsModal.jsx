@@ -7,6 +7,10 @@ import { IoIosClose } from 'react-icons/io';
 import { IoVideocamOutline } from 'react-icons/io5';
 import { createReelsAction } from '../../Redux/Reels/reels.action';
 
+
+
+//Modal View - Scroll
+
 const style = {
     position: 'absolute',
     top: '45%',
@@ -16,10 +20,12 @@ const style = {
     bgcolor: '#211b44',
     border: '1px solid #000',
     boxShadow: 24,
-    overflowY: 'auto', // Scroll yapılabilirlik ekledik
+    overflowY: 'auto', 
     maxHeight: '80vh',
 
 };
+
+
 
 
 
@@ -41,6 +47,8 @@ const CreateReelsModal = ({ handleClose, open }) => {
         handleClose();
         console.log("formik values", values);
     }
+
+    //Form Reels Values
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -52,7 +60,6 @@ const CreateReelsModal = ({ handleClose, open }) => {
 
 
     const handleSelectVideo = async (event) => {
-
         setLoading(true);
         const videoUrl = await uploadToCloudinary(event.target.files[0], "video");
         setSelectedVideo(videoUrl);
@@ -63,8 +70,8 @@ const CreateReelsModal = ({ handleClose, open }) => {
     }
 
     const handleRemoveVideoAndClose = () => {
-        setSelectedVideo(null); // Seçilen videoyu sıfırla
-        handleClose(); // Modalı kapat
+        setSelectedVideo(null); 
+        handleClose(); 
     };
 
     return (
@@ -85,7 +92,6 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                 </IconButton >
                             </div>
                         </div>
-
                         <div className='space-y-2 block w-full flex justify-between'>
                             <Avatar
                                 src={auth?.user.image || ''}
@@ -94,7 +100,6 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                     <span className='text-xl' >{auth.user?.firstName.charAt(0).toUpperCase()}</span>
                                 )}
                             </Avatar>
-
                             <textarea
                                 type='text'
                                 onChange={(e) => {
@@ -103,7 +108,7 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                 value={formik.values.caption}
                                 placeholder="Video Title"
                                 rows="4"
-                                style={{ resize: 'none' }} // Alt çentiği kaldır
+                                style={{ resize: 'none' }} 
                                 class="
                                 mr-4
                                 text-lg
@@ -116,17 +121,10 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                 outline outline-0 
                                 transition-all placeholder-shown:border-blue-gray-200 
                                 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 bg-purple" >
-
-
                             </textarea>
-
-
-
-
-
-
-
                         </div>
+
+                        
                         {selectedVideo && <video class="w-full "
                             posterResizeMode="cover"
                             resizeMode="cover"
@@ -151,10 +149,8 @@ const CreateReelsModal = ({ handleClose, open }) => {
                                     style={{ display: "none" }}
                                     id='video-input'
                                 />
-
                                 <label htmlFor='video-input'>
                                     <IconButton color='primary'
-
                                         component="span"
                                     >
                                         <IoVideocamOutline style={{ color: '#b3bbc6' }} />

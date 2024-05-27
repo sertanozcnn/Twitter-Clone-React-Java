@@ -53,12 +53,14 @@ const Followers = () => {
     }, []);
 
     const handleFollow = (userId) => {
-        // Kullanıcıyı takip etme işlemi
+       // Following the user
+
         dispatch(userFollowAction(localStorage.getItem('jwt'), userId));
       };
 
       const handleunFollow = (userId) => {
-        // Kullanıcıyı takip çıkarma
+      // Unfollow the user
+
         dispatch(userunFollowAction(localStorage.getItem('jwt'), userId));
       };
 
@@ -72,7 +74,9 @@ const Followers = () => {
                     <h1 className='font-kanit  text-gray-50 text-2xl font-bold  ' >{auth.user?.firstName + " " + auth.user?.lastName}</h1>
                 </div>
                 <p className='opacity-70 font-kanit-regular text-gray-200' >
+
                     @{auth.user?.nickname || auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}
+
                 </p>
 
             </div>
@@ -115,11 +119,11 @@ const Followers = () => {
 
                     handleAction={() => {
                         if ((auth.user.followings || []).some(followingId => followingId === user?.id)) {
-                            handleunFollow(user.id); // Kullanıcıyı takip etmiyorsa takip etme işlemini gerçekleştir
+                            handleunFollow(user.id); // If the user is not followed, perform the unfollow operation
                             window.location.href = `/${value}`;
 
                         } else {
-                            handleFollow(user.id); // Kullanıcıyı takip ediyorsa takip etmeme işlemini gerçekleştir
+                            handleFollow(user.id);  //If the user is following, perform unfollowing action
                             window.location.href = `/${value}`;
                         }
                     }}
@@ -133,10 +137,10 @@ const Followers = () => {
                     isFollowingControl={(auth.user.followings || []).some(followingId => followingId === user?.id)}
                     handleAction={() => {
                         if ((auth.user.followings || []).some(followingId => followingId === user?.id)) {
-                            handleunFollow(user.id); // Kullanıcıyı takip etmiyorsa takip etme işlemini gerçekleştir
+                            handleunFollow(user.id);
                             window.location.href = `/${value}`;
                         } else {
-                            handleFollow(user.id); // Kullanıcıyı takip ediyorsa takip etmeme işlemini gerçekleştir
+                            handleFollow(user.id);
                             window.location.href = `/${value}`;
                         }
                     }}

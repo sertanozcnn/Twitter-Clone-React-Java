@@ -13,16 +13,12 @@ const Following = () => {
 
     ]
 
-
     const { auth } = useSelector((state) => state);
     const dispatch = useDispatch();
-
     const [value, setValue] = useState("following");
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-
 
 
     useEffect(() => {
@@ -43,7 +39,6 @@ const Following = () => {
             { value: "followers", name: "Followers", },
     
         ]
-    
         const path = window.location.pathname;
         const tab = tabs.find(item => `/${item.value}` === path);
         if (tab) {
@@ -52,12 +47,10 @@ const Following = () => {
     }, []);
 
     const handleFollow = (userId) => {
-        // Kullanıcıyı takip etme işlemi
         dispatch(userFollowAction(localStorage.getItem('jwt'), userId));
     };
 
     const handleunFollow = (userId) => {
-        // Kullanıcıyı takip etme işlemi
         dispatch(userunFollowAction(localStorage.getItem('jwt'), userId));
     };
 
@@ -76,9 +69,6 @@ const Following = () => {
 
                         @{auth.user?.nickname || auth.user?.firstName.toLowerCase() + "_" + auth.user?.lastName.toLowerCase()}
                     </p>
-
-
-
 
                 </div>
             </div>
@@ -111,8 +101,6 @@ const Following = () => {
                             to={`/${item.value}`}
 
                             value={item.value} label={item.name} sx={{ minWidth: '49%', maxWidth: '16rem', }} />)}
-
-
                     </Tabs>
                 </Box>
 
@@ -121,12 +109,6 @@ const Following = () => {
                     <Divider className='opacity-50' style={{ backgroundColor: '#d7dae0' }} />
                 </div>
 
-
-                {/* <div className='flex-col py-2 px-2' >
-                    {userPosts.map((user) => (
-                        <UserCardFollowing key={user.id} user={user} />
-                    ))}
-                </div> */}
 
                 <div className='flex-col py-2 px-2'>
                     {value === "following" && userPosts.map((user) => (
@@ -137,11 +119,11 @@ const Following = () => {
 
                             handleAction={() => {
                                 if ((auth.user.followings || []).some(followingId => followingId === user?.id)) {
-                                    handleunFollow(user.id); // Kullanıcıyı takip etmiyorsa takip etme işlemini gerçekleştir
+                                    handleunFollow(user.id); 
                                     window.location.href = `/${value}`;
 
                                 } else {
-                                    handleFollow(user.id); // Kullanıcıyı takip ediyorsa takip etmeme işlemini gerçekleştir
+                                    handleFollow(user.id); 
                                     window.location.href = `/${value}`;
                                 }
                             }}
@@ -155,32 +137,17 @@ const Following = () => {
                             isFollowingControl={(auth.user.followings || []).some(followingId => followingId === user?.id)}
                             handleAction={() => {
                                 if ((auth.user.followings || []).some(followingId => followingId === user?.id)) {
-                                    handleunFollow(user.id); // Kullanıcıyı takip etmiyorsa takip etme işlemini gerçekleştir
+                                    handleunFollow(user.id);
                                     window.location.href = `/${value}`;
                                 } else {
-                                    handleFollow(user.id); // Kullanıcıyı takip ediyorsa takip etmeme işlemini gerçekleştir
+                                    handleFollow(user.id);
                                     window.location.href = `/${value}`;
                                 }
                             }}
                         />
                     ))}
                 </div>
-
             </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </Card>
 
     )

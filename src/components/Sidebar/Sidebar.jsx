@@ -28,7 +28,7 @@ function GradientCircularProgress() {
 
 const Sidebar = () => {
   const { auth } = useSelector(store => store);
-  const [anchorEl, setAnchorEl] = useState(null); // useState kullanıldı ve yanlış parantez düzeltildi
+  const [anchorEl, setAnchorEl] = useState(null); 
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Sidebar = () => {
     setLoading(true);
 
     try {
-      await dispatch(logoutUserAction()); // logoutUserAction dispatch ediliyor
+      await dispatch(logoutUserAction()); 
 
 
 
@@ -97,7 +97,7 @@ const Sidebar = () => {
       navigate(`/`)
     }
     if (item.title === "Reels") {
-      handleOpenViewReelsModal(auth.user?.id); // Open the ViewReelsModal for the current user
+      handleOpenViewReelsModal(auth.user?.id); 
     }
 
 

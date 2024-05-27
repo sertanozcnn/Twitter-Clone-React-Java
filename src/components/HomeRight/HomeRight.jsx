@@ -50,12 +50,10 @@ const HomeRight = () => {
   }, []);
 
   const handleFollow = (userId) => {
-    // Kullanıcıyı takip etme işlemi
     dispatch(userFollowAction(localStorage.getItem('jwt'), userId));
   };
 
   const handleunFollow = (userId) => {
-    // Kullanıcıyı takip etme işlemi
     dispatch(userunFollowAction(localStorage.getItem('jwt'), userId));
   };
 
@@ -94,11 +92,11 @@ const HomeRight = () => {
 
               handleAction={() => {
                 if ((auth.user.followings || []).some(followingId => followingId === user?.id)) {
-                  handleunFollow(user.id); // Kullanıcıyı takip etmiyorsa takip etme işlemini gerçekleştir
+                  handleunFollow(user.id); 
                   window.location.href = `/${value}`;
 
                 } else {
-                  handleFollow(user.id); // Kullanıcıyı takip ediyorsa takip etmeme işlemini gerçekleştir
+                  handleFollow(user.id); 
                   window.location.href = `/${value}`;
                 }
               }}

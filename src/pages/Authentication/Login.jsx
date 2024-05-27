@@ -28,7 +28,7 @@ function GradientCircularProgress() {
 
 const Login = () => {
 
-  const [loading, setLoading] = useState(false); // State to manage loading
+  const [loading, setLoading] = useState(false); 
 
   const [error, setError] = useState('');
 
@@ -66,7 +66,7 @@ const Login = () => {
       setLoading(false);
       setError('Account not found.');
       setTimeout(() => {
-        setError(''); // Clear error message after 4 seconds
+        setError(''); 
       }, 3000);
     }
   };

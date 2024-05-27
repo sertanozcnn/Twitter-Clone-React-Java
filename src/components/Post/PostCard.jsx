@@ -28,14 +28,14 @@ const PostCard = ({ item }) => {
 
   const { auth } = useSelector(store => store);
   const { likePostCount } = useSelector(state => state.post);
-  const [anchorEl, setAnchorEl] = useState(null); // useState kullanıldı ve yanlış parantez düzeltildi
+  const [anchorEl, setAnchorEl] = useState(null); 
 
   const open = Boolean(anchorEl);
 
   const [reportedPost, setReportedPost] = useState('');
 
   const [blockedUser, setBlockedUser] = useState('');
-  //const { likedCount  } = useSelector(store => store.post);
+
 
   const [error, setError] = useState('');
 

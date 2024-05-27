@@ -61,7 +61,6 @@ const HomePage = () => {
 
           <Grid item xs={2} lg={0} className='' >
             <div className='sticky top-10 flex-nowrap w-[25rem] min-w-fit  '>
-            {/* w-4/5    md:max-xl:mt-10  min-h-lvh */}
               <HomeRight />
 
             </div>

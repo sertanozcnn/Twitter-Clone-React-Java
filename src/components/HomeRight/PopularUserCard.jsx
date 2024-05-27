@@ -45,7 +45,7 @@ const PopularUserCard = ({ user, isFollowingControl, handleAction, currentUser }
                             dark:hover:border-red-600  dark:hover:text-red-600 "
                                 onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
-                                onClick={handleAction} // handleAction prop'u kullanıldı
+                                onClick={handleAction}
 
 
                             >

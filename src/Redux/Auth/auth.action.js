@@ -21,7 +21,7 @@ export const loginUserAction = (loginData) => async (dispatch) => {
         } else {
             dispatch({ type: LOGIN_FAILURE, payload: 'An error occurred. Please try again later.' });
         }
-        throw error; // Throw error on failure
+        throw error; 
 
     }
 }
@@ -101,7 +101,7 @@ export const userGetPostCount = (jwt, userId) => async (dispatch) => {
             },
         });
 
-        console.log("post_count ----", data); // Payload değerini konsola yazdırın
+        console.log("post_count ----", data); 
         dispatch({ type: GET_USER_POST_SUCCESS, payload: data });
     } catch (error) {
         console.log("user get post count fail------", error);
@@ -120,7 +120,7 @@ export const userFollowingsCount = (jwt, userId) => async (dispatch) => {
             },
         });
 
-        console.log("followings_count ----", data); // Payload değerini konsola yazdırın
+        console.log("followings_count ----", data); 
         dispatch({ type: GET_FOLLOWINGS_COUNT_SUCCESS, payload: data });
     } catch (error) {
         console.log("user follow count fail------", error);
@@ -140,7 +140,7 @@ export const userFollowersCount = (jwt, userId) => async (dispatch) => {
             },
         });
 
-        console.log("followings_count ----", data); // Payload değerini konsola yazdırın
+        console.log("followings_count ----", data); 
         dispatch({ type: GET_FOLLOWERS_COUNT_SUCCESS, payload: data });
     } catch (error) {
         console.log("user followers count fail------", error);
@@ -160,7 +160,7 @@ export const getFollowingDetails = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("followings_count ----", data); // Payload değerini konsola yazdırın
+        console.log("followings_count ----", data); 
         dispatch({ type: GET_FOLLOWING_DETAILS_SUCCESS, payload: data });
     } catch (error) {
         console.log("user followings count fail------", error);
@@ -180,7 +180,7 @@ export const getFollowersDetails = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("followers_count ----", data); // Payload değerini konsola yazdırın
+        console.log("followers_count ----", data); 
         dispatch({ type: GET_FOLLOWERS_DETAILS_SUCCESS, payload: data });
     } catch (error) {
         console.log("user followers count fail------", error);
@@ -201,7 +201,7 @@ export const userFollowAction = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("User Follow Success ----", data); // Payload değerini konsola yazdırın
+        console.log("User Follow Success ----", data); 
         dispatch({ type: USER_FOLLOWING_SUCCESS, payload: data });
     } catch (error) {
         console.log("User Follow Failed -----", error);
@@ -221,7 +221,7 @@ export const userunFollowAction = (jwt,userId) => async (dispatch) => {
             },
         });
 
-        console.log("User UNFollow Success ----", data); // Payload değerini konsola yazdırın
+        console.log("User UNFollow Success ----", data); 
         dispatch({ type: USER_UNFOLLOWING_SUCCESS, payload: data });
     } catch (error) {
         console.log("User UNFollow Failed -----", error);
@@ -242,7 +242,7 @@ export const getAllUsersAction = (jwt) => async (dispatch) => {
             },
         });
 
-        console.log("User GETALL Success ----", data); // Payload değerini konsola yazdırın
+        console.log("User GETALL Success ----", data); 
         dispatch({ type: GET_ALL_USERS_SUCCESS, payload: data });
     } catch (error) {
         console.log("User GETALL Failed -----", error);
@@ -263,7 +263,7 @@ export const getLastFiveUsersAction = (jwt) => async (dispatch) => {
             },
         });
 
-        console.log("User LAST Success ----", data); // Payload değerini konsola yazdırın
+        console.log("User LAST Success ----", data); 
         dispatch({ type: GET_LAST_FIVE_USERS_SUCCESS, payload: data });
     } catch (error) {
         console.log("User LAST Failed -----", error);
@@ -282,12 +282,12 @@ export const logoutUserAction = () => async (dispatch) => {
 
     try {
         await axios.post(`${API_BASE_URL}/auth/logout`);
-        localStorage.removeItem("jwt"); // localStorage'dan JWT'yi kaldır
-        dispatch({ type: LOGOUT_SUCCESS }); // Logout işleminin 
+        localStorage.removeItem("jwt"); 
+        dispatch({ type: LOGOUT_SUCCESS }); 
 
     } catch (error) {
         console.log("Logout failed:", error);
-        // Logout işlemi başarısız olursa uygun bir işlem yapabilirsiniz
+        
     }
 
 }
@@ -301,7 +301,7 @@ export const searchUserAction = (jwt, query) => async (dispatch) => {
                 Authorization: `Bearer ${jwt}`,
             },
         });
-        console.log("SEARCH Success ----", data); // Payload değerini konsola yazdırın
+        console.log("SEARCH Success ----", data); 
         dispatch({ type: SEARCH_USER_SUCCESS, payload: data });
     } catch (error) {
         console.log("User search failed:", error);

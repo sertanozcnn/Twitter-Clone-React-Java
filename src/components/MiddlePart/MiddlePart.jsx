@@ -112,7 +112,8 @@ const MiddlePart = () => {
 
           <StoryCircle
 
-            onClick={() => handleOpenViewReelsModal(user.id)} // userId değerini iletiyoruz
+            onClick={() => handleOpenViewReelsModal(user.id)} // We pass the userId value
+
             key={user.id}
             user={user}
 
