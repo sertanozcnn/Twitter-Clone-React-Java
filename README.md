@@ -52,9 +52,9 @@
 **Clone the project and access the folder**
 
 ```bash
-$ git clone https://github.com/eltonlazzarin/twitter-clone-reactjs.git
+$ git clone https://github.com/sertanozcnn/Twitter-Clone-React-Java
 
-$ cd twitter-clone-reactjs
+$ cd Twitter-Clone-React-Java
 ```
 
 **Follow the steps below**
@@ -66,27 +66,6 @@ $ yarn
 # Run the web app
 $ yarn start
 ```
-
-## 🤔 How to contribute
-
-**Follow the steps below**
-
-```bash
-# Clone your fork
-$ git clone https://github.com/eltonlazzarin/twitter-clone-reactjs.git
-
-$ cd twitter-clone-reactjs
-
-# Create a branch with your feature
-$ git checkout -b your-feature
-
-# Make the commit with your changes
-$ git commit -m 'feat: Your new feature'
-
-# Send the code to your remote branch
-$ git push origin your-feature
-```
-
 
 
 
