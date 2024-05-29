@@ -14,7 +14,7 @@
 <a href="#-about-the-project">Running Processes</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-technologies">Use Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-getting-started">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
- <a href="#-how-to-contribute">How To Contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+ <a href="#-how-to-contribute">Installation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 
 </p>
 
@@ -49,7 +49,8 @@
 - [VsCode](https://code.visualstudio.com) 
 
 
-**Clone the project and access the folder**
+
+## ▶️ Getting Started
 
 ```bash
 $ git clone https://github.com/sertanozcnn/Twitter-Clone-React-Java
@@ -57,7 +58,7 @@ $ git clone https://github.com/sertanozcnn/Twitter-Clone-React-Java
 $ cd Twitter-Clone-React-Java
 ```
 
-## Installation
+## 🔨 Installation
 
 To work with this project locally, first install all dependecies:
 
