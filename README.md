@@ -5,8 +5,8 @@
 </h3>
 
 
-- [Backend Link](https://nodejs.org/en)
-- [Frontend Link](https://nodejs.org/en)
+- [Backend Link](https://github.com/sertanozcnn/Twitter-Clone-React-Java)
+- [Frontend Link](https://github.com/sertanozcnn/Twitter-Clone-React-Java)
 
 
 <p align="center">
