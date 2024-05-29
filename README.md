@@ -27,7 +27,7 @@ FrontEnd
 
 <h4>Follow the steps below</h4>
 
-<p>
+
 - **Profile Update**
 - **Create and Reels Post**
 - **Create Post Comment**
@@ -37,7 +37,7 @@ FrontEnd
 - **Delete Post**
 - **User Search**
 - **User Post-Reels-Saved-Liked View**
-</p>
+
 
 ## 🚀 Use Technologies
 
