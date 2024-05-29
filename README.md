@@ -25,16 +25,19 @@ FrontEnd
 
 
 
-<p>Çalışan İşlemler.</p>
-Profile Update
-Create and Reels Post
-Like-Unlike Post
-Saved-Unsaved Post
-Follow-UnFollow User
-Delete Post
-Comment
-Post-Reels-Saved-Liked görüntüleme
-User Search
+<h4>Follow the steps below</h4>
+
+**Profile Update**
+**Create and Reels Post**
+**Create Post Comment**
+**Like-Unlike Post**
+**Saved-Unsaved Poste**
+**Follow-UnFollow User**
+**Delete Post**
+**User Search**
+**User Post-Reels-Saved-Liked View**
+
+
 
 
 
