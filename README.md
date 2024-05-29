@@ -4,34 +4,28 @@
   Twitter Clone build in ReactJS and TypeScript
 </h3>
 
+
+Backend
+FrontEnd
+
+
 <p align="center">
   <a href="#-about-the-project">About The Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Use Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-getting-started">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-how-to-contribute">How To Contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-license">License</a>
+ <a href="#-how-to-contribute">How To Contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+
 </p>
 
 ## 👨🏻‍💻 About the project
 
 <h1 align="center">
 	<video alt="Project" src="https://github.com/sertanozcnn/Twitter-Clone-React-Java/assets/90261603/b9586b76-ee2e-4962-8537-84dfdb7f4288" />
-
 </h1>
 
 
-Backend
-FrontEnd
 
-👨🏻‍💻 About the project
-
-
-
-  Çalışan İşlemler
-
-  gif
-  
-
+<p>Çalışan İşlemler.</p>
 Profile Update
 Create and Reels Post
 Like-Unlike Post
@@ -44,17 +38,53 @@ User Search
 
 
 
-🚀 Technologies
-ReactJs
-TypeScript
-Redux-ToolKit
-Talwind Css
-MaterialUi
-React-İcon
-VsCode
+## 🚀 Use Technologies
+
+- [ReactJS](https://nodejs.org/en)
+- [TypeScript](https://www.typescriptlang.org)
+- [Redux-ToolKit](https://react-sticky-box.codecks.io)
+- [MaterialUi](https://styled-icons.js.org)
+- [React-İcon](https://styled-components.com)
+- [VsCode](https://code.visualstudio.com) 
 
 
+**Clone the project and access the folder**
 
+```bash
+$ git clone https://github.com/eltonlazzarin/twitter-clone-reactjs.git
+
+$ cd twitter-clone-reactjs
+```
+
+**Follow the steps below**
+
+```bash
+# Install the dependencies
+$ yarn
+
+# Run the web app
+$ yarn start
+```
+
+## 🤔 How to contribute
+
+**Follow the steps below**
+
+```bash
+# Clone your fork
+$ git clone https://github.com/eltonlazzarin/twitter-clone-reactjs.git
+
+$ cd twitter-clone-reactjs
+
+# Create a branch with your feature
+$ git checkout -b your-feature
+
+# Make the commit with your changes
+$ git commit -m 'feat: Your new feature'
+
+# Send the code to your remote branch
+$ git push origin your-feature
+```
 
 
 
