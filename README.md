@@ -21,9 +21,8 @@
 ## 👨🏻‍💻 About the project
 
 <h1 align="center">
-	<video alt="Project" src="https://github.com/sertanozcnn/Twitter-Clone-React-Java/assets/90261603/b9586b76-ee2e-4962-8537-84dfdb7f4288" />
+	<video alt="Project" src="https://github.com/sertanozcnn/Twitter-Clone-React-Java/assets/90261603/a0fa4eed-fa4f-41dc-811e-931ac2167031" />
 </h1>
-
 
 
 ## ⚙️ Follow the steps below
