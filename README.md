@@ -25,7 +25,7 @@
 </h1>
 
 
-## ⚙️ Follow the steps below
+## ⚙️ Running Processes
 
 - **Profile Update**
 - **Create and Reels Post**
