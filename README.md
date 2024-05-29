@@ -5,7 +5,7 @@
 </h3>
 
 
-- [Backend Link](https://github.com/sertanozcnn/Twitter-Clone-React-Java)
+- [Backend Link](https://github.com/sertanozcnn/Twitter-Clone-Backend-Java)
 - [Frontend Link](https://github.com/sertanozcnn/Twitter-Clone-React-Java)
 
 
