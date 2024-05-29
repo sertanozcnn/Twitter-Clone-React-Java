@@ -57,16 +57,25 @@ $ git clone https://github.com/sertanozcnn/Twitter-Clone-React-Java
 $ cd Twitter-Clone-React-Java
 ```
 
-**Follow the steps below**
+## Installation
 
-```bash
-# Install the dependencies
-$ yarn
+To work with this project locally, first install all dependecies:
 
-# Run the web app
-$ yarn start
+```
+npm install
 ```
 
+To build and run the project, project runs on port 3000.
+
+```
+npm start
+```
+
+To make the final build before pushing to production:
+
+```
+npm run production 
+```
 
 
 
