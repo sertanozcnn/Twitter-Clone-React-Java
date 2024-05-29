@@ -27,19 +27,17 @@ FrontEnd
 
 <h4>Follow the steps below</h4>
 
-
-- **[Create and Reels Post]**
-
-**Profile Update**
-**Create and Reels Post**
-**Create Post Comment**
-**Like-Unlike Post**
-**Saved-Unsaved Poste**
-**Follow-UnFollow User**
-**Delete Post**
-**User Search**
-**User Post-Reels-Saved-Liked View**
-
+<p>
+- **Profile Update**
+- **Create and Reels Post**
+- **Create Post Comment**
+- **Like-Unlike Post**
+- **Saved-Unsaved Poste**
+- **Follow-UnFollow User**
+- **Delete Post**
+- **User Search**
+- **User Post-Reels-Saved-Liked View**
+</p>
 
 ## 🚀 Use Technologies
 
