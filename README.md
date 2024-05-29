@@ -15,13 +15,17 @@
 ## 👨🏻‍💻 About the project
 
 <h1 align="center">
-	<img alt="Project Screenshots" src="https://github.com/eltonlazzarin/twitter-clone-reactjs/blob/master/screenshots/twitterclone.gif" />
+	<video alt="Project" src="https://github.com/sertanozcnn/Twitter-Clone-React-Java/assets/90261603/b9586b76-ee2e-4962-8537-84dfdb7f4288" />
+
 </h1>
 
 
 Backend
 FrontEnd
+
 👨🏻‍💻 About the project
+
+
 
   Çalışan İşlemler
 
