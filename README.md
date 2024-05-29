@@ -27,6 +27,9 @@ FrontEnd
 
 <h4>Follow the steps below</h4>
 
+
+- **[Create and Reels Post]**
+
 **Profile Update**
 **Create and Reels Post**
 **Create Post Comment**
@@ -36,17 +39,6 @@ FrontEnd
 **Delete Post**
 **User Search**
 **User Post-Reels-Saved-Liked View**
-
-- **[Create and Reels Post]**
-
-- [ReactJS](https://nodejs.org/en)
-- [TypeScript](https://www.typescriptlang.org)
-- [Redux-ToolKit](https://react-sticky-box.codecks.io)
-- [MaterialUi](https://styled-icons.js.org)
-- [React-İcon](https://styled-components.com)
-- [VsCode](https://code.visualstudio.com) 
-
-
 
 
 ## 🚀 Use Technologies
