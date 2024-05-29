@@ -35,16 +35,16 @@
 - **Follow-UnFollow User**
 - **Delete Post**
 - **User Search**
-- **User Post-Reels-Saved-Liked View**
+- **User Post-Reels-Saved-Liked Views**
 
 
 ## 🚀 Use Technologies
 
-- [ReactJS](https://nodejs.org/en)
-- [TypeScript](https://www.typescriptlang.org)
-- [Redux-ToolKit](https://react-sticky-box.codecks.io)
-- [MaterialUi](https://styled-icons.js.org)
-- [React-İcon](https://styled-components.com)
+- [ReactJS](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Redux-ToolKit](https://redux-toolkit.js.org/)
+- [MaterialUi](https://mui.com/material-ui/)
+- [React-İcon](https://react-icons.github.io/react-icons/search/#q=photo)
 - [VsCode](https://code.visualstudio.com) 
 
 
